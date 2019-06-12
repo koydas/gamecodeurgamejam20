@@ -11,40 +11,32 @@ namespace Laser_beams_pew_pew.Scenes
     {
         public Ship Ship;
         public List<Laser> Lasers = new List<Laser>();
-
+        
         public GamePlay()
         {
-            Ship = new Ship();
+            Ship = new Ship(Lasers);
         }
 
         public void Update(GameTime gameTime)
         {
-            var keyboardState = Keyboard.GetState();
+            Ship.Update(gameTime);
 
-            if (keyboardState.IsKeyDown(Keys.Up) && Ship.Position.Y > 0)
+            for (var index = 0; index < Lasers.Count; index++)
             {
-                Ship.Position -= new Vector2(0, Ship.Speed);
-            }
-            if (keyboardState.IsKeyDown(Keys.Down) &&
-                Ship.Position.Y + Ship.Texture.Height < Main.Self.WindowHeight)
-            {
-                Ship.Position += new Vector2(0, Ship.Speed);
-            }
+                var laser = Lasers[index];
 
-            if (keyboardState.IsKeyDown(Keys.Space))
-            {
-                Lasers.Add(new Laser(Ship.Position));
-            }
-
-            foreach (var laser in Lasers)
-            {
                 laser.Update(gameTime);
+
+                if (laser.Position.X > Main.Self.WindowWidth)
+                {
+                    Lasers.RemoveAt(index);
+                }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            Main.Self.GraphicsDevice.Clear(Color.HotPink);
+            Main.Self.GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
 
