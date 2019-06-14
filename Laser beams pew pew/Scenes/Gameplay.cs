@@ -3,7 +3,6 @@ using Laser_beams_pew_pew.Scenes.Interfaces;
 using Laser_beams_pew_pew.UI_Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Laser_beams_pew_pew.Scenes
 {
@@ -40,7 +39,16 @@ namespace Laser_beams_pew_pew.Scenes
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(Ship.Texture, Ship.Position);
+            spriteBatch.Draw(
+                Ship.Texture,
+                Ship.Position,
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                0.17f,
+                SpriteEffects.None,
+                1f);
 
             foreach (var laser in Lasers)
             {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/ship.png</SourceFile>
-  <SourceTime>2019-06-11T20:51:01.2280798-04:00</SourceTime>
+  <SourceTime>2019-06-12T21:02:58.5210162-04:00</SourceTime>
   <DestFile>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/bin/Windows/images/ship.xnb</DestFile>
-  <DestTime>2019-06-11T20:51:05.2556969-04:00</DestTime>
+  <DestTime>2019-06-12T21:03:08.4332388-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

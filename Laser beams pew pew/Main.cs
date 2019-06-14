@@ -19,7 +19,11 @@ namespace Laser_beams_pew_pew
 
         public Main()
         {
-            graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = 1920,
+                PreferredBackBufferHeight = 1080
+            };
             Content.RootDirectory = "Content";
             Self = this;
         }

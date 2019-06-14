@@ -14,7 +14,7 @@ namespace Laser_beams_pew_pew.UI_Elements
         public Ship(List<Laser> lasers)
         {
             Texture = Main.Self.Content.Load<Texture2D>("images/ship");
-            Position = new Vector2(20, Main.Self.WindowHeight / 2 - Texture.Height / 2);
+            //Position = new Vector2(20, Main.Self.WindowHeight / 2 - Texture.Height / 2);
             Speed = 5;
             _lasers = lasers;
         }
