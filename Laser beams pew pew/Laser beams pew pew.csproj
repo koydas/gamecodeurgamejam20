@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game objects\GameObject.cs" />
-    <Compile Include="Game objects\Boss.cs" />
+    <Compile Include="Game objects\Bosses\LaserBoss.cs" />
     <Compile Include="Game objects\Interfaces\IProjectile.cs" />
     <Compile Include="Game objects\Projectiles\Laser.cs" />
     <Compile Include="Main.cs" />

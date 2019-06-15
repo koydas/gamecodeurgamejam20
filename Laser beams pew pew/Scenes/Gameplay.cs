@@ -10,7 +10,7 @@ namespace Laser_beams_pew_pew.Scenes
     public class GamePlay: IScene
     {
         public Player Player;
-        public Boss Boss;
+        public LaserBoss LaserBoss;
 
         public List<Bullet> Bullets = new List<Bullet>();
         public List<Laser> Lasers = new List<Laser>();
@@ -18,13 +18,13 @@ namespace Laser_beams_pew_pew.Scenes
         public GamePlay()
         {
             Player = new Player(Bullets);
-            Boss = new Boss(Lasers, Player);
+            LaserBoss = new LaserBoss(Lasers, Player);
         }
 
         public void Update(GameTime gameTime)
         {
             Player.Update(gameTime);
-            Boss.Update(gameTime);
+            LaserBoss.Update(gameTime);
 
             for (var index = 0; index < Bullets.Count; index++)
             {
@@ -32,7 +32,7 @@ namespace Laser_beams_pew_pew.Scenes
 
                 bullet.Update(gameTime);
 
-                Boss.IsHit(bullet);
+                LaserBoss.IsHit(bullet);
 
                 if (bullet.Position.X > Main.Self.WindowWidth || bullet.HasHitSomething)
                 {
@@ -54,7 +54,7 @@ namespace Laser_beams_pew_pew.Scenes
                 }
             }
 
-            if (Boss.HitPoints <= 0 || Player.HitPoints <= 0)
+            if (LaserBoss.HitPoints <= 0 || Player.HitPoints <= 0)
             {
                 Main.Self.CurrentScene = new Menu();
             }
@@ -67,7 +67,7 @@ namespace Laser_beams_pew_pew.Scenes
             spriteBatch.Begin();
 
             Player.Draw(spriteBatch, gameTime);
-            Boss.Draw(spriteBatch, gameTime);
+            LaserBoss.Draw(spriteBatch, gameTime);
 
             foreach (var bullet in Bullets)
             {

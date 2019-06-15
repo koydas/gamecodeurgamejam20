@@ -36,7 +36,7 @@ namespace Laser_beams_pew_pew.Game_objects
             Move(keyboardState);
 
             if (keyboardState.IsKeyDown(Keys.Space) &&
-                gameTime.TotalGameTime.TotalMilliseconds - _lastShotTimer > 200)
+                gameTime.TotalGameTime.TotalMilliseconds - _lastShotTimer > 500)
             {
                 Vector2 position = new Vector2
                 {

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Laser_beams_pew_pew.Game_objects
 {
     //todo : make as singleton
-    public sealed class Boss : GameObject
+    public sealed class LaserBoss : GameObject
     {
         public override int HitPoints { get; set; }
 
@@ -25,15 +25,13 @@ namespace Laser_beams_pew_pew.Game_objects
             Y = Position.Y + HitBox.Height / 3f * 1.8f,
         };
 
-        public Boss(List<Laser> lasers, Player player)
+        public LaserBoss(List<Laser> lasers, Player player)
         {
             Scale = 0.5f;
 
             HitPoints = 100;
             _lasers = lasers;
             _player = player;
-
-            Speed = 4;
 
             Texture = Main.Self.Content.Load<Texture2D>("images/ennemy-ship");
             TextureHealthBar = Main.Self.Content.Load<Texture2D>("images/healthbar");
@@ -48,6 +46,24 @@ namespace Laser_beams_pew_pew.Game_objects
         public override void Update(GameTime gameTime)
         {
             var elapsedTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+            // phase 1
+            var lifePercentage = HitPoints/100f;
+
+            if (lifePercentage > 0.5f)
+            {
+                Speed = 4;
+            }
+            // Phase 2
+            else if (lifePercentage > .25f)
+            {
+                Speed = 6;
+            }
+            // Phase 3
+            else
+            {
+                Speed = 8;
+            }
 
             ShootLaser(elapsedTime);
             Move(elapsedTime);
@@ -92,6 +108,9 @@ namespace Laser_beams_pew_pew.Game_objects
 
         private void MoveUpDown()
         {
+            // doesnt always follow
+            if (_random.Next(0, 3) == 1) return;
+
             if (_player.Position.Y > _laserPosition.Y)
             {
                 Position += Vector2.UnitY * Speed;
