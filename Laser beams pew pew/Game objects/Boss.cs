@@ -19,6 +19,12 @@ namespace Laser_beams_pew_pew.Game_objects
         private readonly Random _random = new Random();
         private Texture2D TextureHealthBar { get; set; }
 
+        private Vector2 _laserPosition => new Vector2
+        {
+            X = Position.X + HitBox.Width / 10f,
+            Y = Position.Y + HitBox.Height / 3f * 1.8f,
+        };
+
         public Boss(List<Laser> lasers, Ship ship)
         {
             Scale = 0.5f;
@@ -86,11 +92,11 @@ namespace Laser_beams_pew_pew.Game_objects
 
         private void MoveUpDown()
         {
-            if (_ship.Position.Y > Position.Y)
+            if (_ship.Position.Y > _laserPosition.Y)
             {
                 Position += Vector2.UnitY * Speed;
             }
-            if (_ship.Position.Y < Position.Y)
+            if (_ship.Position.Y < _laserPosition.Y)
             {
                 Position -= Vector2.UnitY * Speed;
             }
@@ -100,13 +106,7 @@ namespace Laser_beams_pew_pew.Game_objects
         {
             if (elapsedTime - _lastShotTimer > 500 && _random.Next(0, 30) == 21)
             {
-                Vector2 position = new Vector2
-                {
-                    X = Position.X + HitBox.Width / 2f,
-                    Y = Position.Y + HitBox.Height / 2f,
-                };
-
-                _lasers.Add(new Laser(position));
+                _lasers.Add(new Laser(_laserPosition));
                 _lastShotTimer = elapsedTime;
             }
         }
