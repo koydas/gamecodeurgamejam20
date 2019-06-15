@@ -13,6 +13,8 @@ namespace Laser_beams_pew_pew.Game_objects
         private readonly List<Laser> _lasers;
         private double _lastShotTimer;
         private Ship _ship;
+        private double _lastMovementChange;
+        private double _lastMovementChangeCoolDown;
 
         public override int HitPoints { get; set; }
 
@@ -43,7 +45,9 @@ namespace Laser_beams_pew_pew.Game_objects
         {
             Random r = new Random();
 
-            if (gameTime.TotalGameTime.TotalMilliseconds - _lastShotTimer > 500 && r.Next(0, 30) == 21)
+            var elapsedTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+            if (elapsedTime - _lastShotTimer > 500 && r.Next(0, 30) == 21)
             {
                 Vector2 position = new Vector2
                 {
@@ -52,7 +56,7 @@ namespace Laser_beams_pew_pew.Game_objects
                 };
 
                 _lasers.Add(new Laser(position));
-                _lastShotTimer = gameTime.TotalGameTime.TotalMilliseconds;
+                _lastShotTimer = elapsedTime;
             }
 
             if (_ship.Position.Y > Position.Y)
@@ -62,6 +66,34 @@ namespace Laser_beams_pew_pew.Game_objects
             if (_ship.Position.Y < Position.Y)
             {
                 Position -= Vector2.UnitY * Speed;
+            }
+
+            if (_lastMovementChangeCoolDown == 0 || elapsedTime - _lastMovementChangeCoolDown > 5000)
+            {
+                // Going front for 10sec
+                if (_lastMovementChange == 0 || elapsedTime - _lastMovementChange < 3000 &&
+                    Position.X > Main.Self.WindowWidth / 2f)
+                {
+                    if (_lastMovementChange == 0)
+                        _lastMovementChange = elapsedTime;
+
+                    Position -= Vector2.UnitX * Speed;
+
+                }
+                // go back
+                else if (Position.X + HitBox.Width < Main.Self.WindowWidth)
+                {
+                    if (Position.X + HitBox.Width > Main.Self.WindowWidth)
+                        _lastMovementChange = 0;
+
+                    Position += Vector2.UnitX * Speed;
+                }
+                // 30sec cooldown
+                else
+                {
+                    _lastMovementChange = 0;
+                    _lastMovementChangeCoolDown = elapsedTime;
+                }
             }
         }
     }
