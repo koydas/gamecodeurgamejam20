@@ -16,14 +16,9 @@ namespace Laser_beams_pew_pew.Game_objects
         private double _lastShotTimer;
         private int _burst;
         private double _gustCooldown;
-        private static bool _hasInstance;
 
         public Ship(List<Bullet> lasers)
         {
-            if (_hasInstance)
-                throw new Exception("You can't have more than one Ship at a time");
-
-            _hasInstance = true;
             Scale = 0.1f;
 
             HitPoints = 1;

@@ -53,6 +53,11 @@ namespace Laser_beams_pew_pew.Scenes
                     Lasers.RemoveAt(index);
                 }
             }
+
+            if (Boss.HitPoints <= 0 || Ship.HitPoints <= 0)
+            {
+                Main.Self.CurrentScene = new Menu();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)

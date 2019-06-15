@@ -43,14 +43,14 @@ namespace Laser_beams_pew_pew.Game_objects
                 depth);
         }
 
-        
-
         public virtual bool IsHit(IGameObject collider)
         {
             if (collider is IProjectile projectile && collider.HitBox.Intersects(HitBox))
             {
                 // is hit
                 projectile.HasHitSomething = true;
+
+                HitPoints -= 1;
 
                 return true;
             }
