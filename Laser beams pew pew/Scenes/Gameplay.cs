@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Laser_beams_pew_pew.Game_objects;
+using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Laser_beams_pew_pew.Scenes.Interfaces;
-using Laser_beams_pew_pew.UI_Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,16 +10,20 @@ namespace Laser_beams_pew_pew.Scenes
     public class GamePlay: IScene
     {
         public Ship Ship;
-        public List<Laser> Lasers = new List<Laser>();
+        public Boss Boss;
+
+        public List<Bullet> Lasers = new List<Bullet>();
         
         public GamePlay()
         {
             Ship = new Ship(Lasers);
+            Boss = new Boss();
         }
 
         public void Update(GameTime gameTime)
         {
             Ship.Update(gameTime);
+            Boss.Update(gameTime);
 
             for (var index = 0; index < Lasers.Count; index++)
             {
@@ -26,7 +31,9 @@ namespace Laser_beams_pew_pew.Scenes
 
                 laser.Update(gameTime);
 
-                if (laser.Position.X > Main.Self.WindowWidth)
+                Boss.IsHit(laser);
+
+                if (laser.Position.X > Main.Self.WindowWidth || laser.HasHitSomething)
                 {
                     Lasers.RemoveAt(index);
                 }
@@ -39,20 +46,12 @@ namespace Laser_beams_pew_pew.Scenes
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(
-                Ship.Texture,
-                Ship.Position,
-                null,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                0.17f,
-                SpriteEffects.None,
-                1f);
+            Ship.Draw(spriteBatch, gameTime);
+            Boss.Draw(spriteBatch, gameTime);
 
             foreach (var laser in Lasers)
             {
-                spriteBatch.Draw(laser.Texture, laser.Position);
+                laser.Draw(spriteBatch, gameTime);
             }
 
             spriteBatch.End();
