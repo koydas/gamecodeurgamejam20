@@ -13,7 +13,7 @@ namespace Laser_beams_pew_pew.Game_objects
 
         private readonly List<Laser> _lasers;
         private double _lastShotTimer;
-        private readonly Ship _ship;
+        private readonly Player _player;
         private double _lastMovementChange;
         private double _lastMovementChangeCoolDown;
         private readonly Random _random = new Random();
@@ -25,13 +25,13 @@ namespace Laser_beams_pew_pew.Game_objects
             Y = Position.Y + HitBox.Height / 3f * 1.8f,
         };
 
-        public Boss(List<Laser> lasers, Ship ship)
+        public Boss(List<Laser> lasers, Player player)
         {
             Scale = 0.5f;
 
             HitPoints = 100;
             _lasers = lasers;
-            _ship = ship;
+            _player = player;
 
             Speed = 4;
 
@@ -92,11 +92,11 @@ namespace Laser_beams_pew_pew.Game_objects
 
         private void MoveUpDown()
         {
-            if (_ship.Position.Y > _laserPosition.Y)
+            if (_player.Position.Y > _laserPosition.Y)
             {
                 Position += Vector2.UnitY * Speed;
             }
-            if (_ship.Position.Y < _laserPosition.Y)
+            if (_player.Position.Y < _laserPosition.Y)
             {
                 Position -= Vector2.UnitY * Speed;
             }

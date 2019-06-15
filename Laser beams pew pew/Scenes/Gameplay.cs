@@ -9,7 +9,7 @@ namespace Laser_beams_pew_pew.Scenes
 {
     public class GamePlay: IScene
     {
-        public Ship Ship;
+        public Player Player;
         public Boss Boss;
 
         public List<Bullet> Bullets = new List<Bullet>();
@@ -17,13 +17,13 @@ namespace Laser_beams_pew_pew.Scenes
         
         public GamePlay()
         {
-            Ship = new Ship(Bullets);
-            Boss = new Boss(Lasers, Ship);
+            Player = new Player(Bullets);
+            Boss = new Boss(Lasers, Player);
         }
 
         public void Update(GameTime gameTime)
         {
-            Ship.Update(gameTime);
+            Player.Update(gameTime);
             Boss.Update(gameTime);
 
             for (var index = 0; index < Bullets.Count; index++)
@@ -46,7 +46,7 @@ namespace Laser_beams_pew_pew.Scenes
 
                 laser.Update(gameTime);
 
-                Ship.IsHit(laser);
+                Player.IsHit(laser);
 
                 if (laser.Position.X > Main.Self.WindowWidth || laser.HasHitSomething)
                 {
@@ -54,7 +54,7 @@ namespace Laser_beams_pew_pew.Scenes
                 }
             }
 
-            if (Boss.HitPoints <= 0 || Ship.HitPoints <= 0)
+            if (Boss.HitPoints <= 0 || Player.HitPoints <= 0)
             {
                 Main.Self.CurrentScene = new Menu();
             }
@@ -66,7 +66,7 @@ namespace Laser_beams_pew_pew.Scenes
 
             spriteBatch.Begin();
 
-            Ship.Draw(spriteBatch, gameTime);
+            Player.Draw(spriteBatch, gameTime);
             Boss.Draw(spriteBatch, gameTime);
 
             foreach (var bullet in Bullets)

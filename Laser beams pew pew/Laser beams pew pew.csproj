@@ -53,7 +53,7 @@
     <Compile Include="Scenes\Menu.cs" />
     <Compile Include="Game objects\Interfaces\IGameObject.cs" />
     <Compile Include="Game objects\Projectiles\Bullet.cs" />
-    <Compile Include="Game objects\Ship.cs" />
+    <Compile Include="Game objects\Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

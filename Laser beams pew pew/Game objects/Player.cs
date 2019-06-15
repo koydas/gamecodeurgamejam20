@@ -8,16 +8,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Laser_beams_pew_pew.Game_objects
 {
-    public sealed class Ship : GameObject
+    public sealed class Player : GameObject
     {
         public override int HitPoints { get; set; }
 
         private readonly List<Bullet> _lasers;
         private double _lastShotTimer;
-        private int _burst;
-        private double _gustCooldown;
 
-        public Ship(List<Bullet> lasers)
+        public Player(List<Bullet> lasers)
         {
             Scale = 0.1f;
 
@@ -42,7 +40,7 @@ namespace Laser_beams_pew_pew.Game_objects
             {
                 Vector2 position = new Vector2
                 {
-                    X = Position.X + HitBox.Width/2f,
+                    X = Position.X + HitBox.Width - HitBox.Width/8f,
                     Y = Position.Y + HitBox.Height / 2f,
                 };
 
