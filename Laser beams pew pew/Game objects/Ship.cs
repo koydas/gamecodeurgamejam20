@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Laser_beams_pew_pew.Game_objects.Interfaces;
 using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,7 +26,7 @@ namespace Laser_beams_pew_pew.Game_objects
             _hasInstance = true;
             Scale = 0.1f;
 
-            HitPoints = 100;
+            HitPoints = 1;
 
             Texture = Main.Self.Content.Load<Texture2D>("images/ship");
             Position = new Vector2(20, Main.Self.WindowHeight / 2 - HitBox.Height / 2);

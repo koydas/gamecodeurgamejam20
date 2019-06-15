@@ -44,6 +44,7 @@
     <Compile Include="Game objects\GameObject.cs" />
     <Compile Include="Game objects\Boss.cs" />
     <Compile Include="Game objects\Interfaces\IProjectile.cs" />
+    <Compile Include="Game objects\Projectiles\Laser.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

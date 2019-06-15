@@ -12,12 +12,13 @@ namespace Laser_beams_pew_pew.Scenes
         public Ship Ship;
         public Boss Boss;
 
-        public List<Bullet> Lasers = new List<Bullet>();
+        public List<Bullet> Bullets = new List<Bullet>();
+        public List<Laser> Lasers = new List<Laser>();
         
         public GamePlay()
         {
-            Ship = new Ship(Lasers);
-            Boss = new Boss();
+            Ship = new Ship(Bullets);
+            Boss = new Boss(Lasers, Ship);
         }
 
         public void Update(GameTime gameTime)
@@ -25,13 +26,27 @@ namespace Laser_beams_pew_pew.Scenes
             Ship.Update(gameTime);
             Boss.Update(gameTime);
 
+            for (var index = 0; index < Bullets.Count; index++)
+            {
+                var bullet = Bullets[index];
+
+                bullet.Update(gameTime);
+
+                Boss.IsHit(bullet);
+
+                if (bullet.Position.X > Main.Self.WindowWidth || bullet.HasHitSomething)
+                {
+                    Bullets.RemoveAt(index);
+                }
+            }
+
             for (var index = 0; index < Lasers.Count; index++)
             {
                 var laser = Lasers[index];
 
                 laser.Update(gameTime);
 
-                Boss.IsHit(laser);
+                Ship.IsHit(laser);
 
                 if (laser.Position.X > Main.Self.WindowWidth || laser.HasHitSomething)
                 {
@@ -48,6 +63,11 @@ namespace Laser_beams_pew_pew.Scenes
 
             Ship.Draw(spriteBatch, gameTime);
             Boss.Draw(spriteBatch, gameTime);
+
+            foreach (var bullet in Bullets)
+            {
+                bullet.Draw(spriteBatch, gameTime);
+            }
 
             foreach (var laser in Lasers)
             {
