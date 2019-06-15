@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -6,7 +7,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Laser_beams_pew_pew.Game_objects
 {
-    //todo : make as singleton
     public sealed class Ship : GameObject
     {
         public override int HitPoints { get; set; }
@@ -15,17 +15,24 @@ namespace Laser_beams_pew_pew.Game_objects
         private double _lastShotTimer;
         private int _burst;
         private double _gustCooldown;
+        private static bool _hasInstance;
 
         public Ship(List<Bullet> lasers)
         {
+            if (_hasInstance)
+                throw new Exception("You can't have more than one Ship at a time");
+
+            _hasInstance = true;
+            Scale = 0.1f;
+
             HitPoints = 100;
 
             Texture = Main.Self.Content.Load<Texture2D>("images/ship");
-            //Position = new Vector2(20, Main.Self.WindowHeight / 2 - Texture.Height / 2);
-            Position = new Vector2(20, 20);
-            Speed = 5;
+            Position = new Vector2(20, Main.Self.WindowHeight / 2 - HitBox.Height / 2);
+
+            Speed = 8;
             _lasers = lasers;
-            Scale = 0.17f;
+            
         }
 
         public override void Update(GameTime gameTime)
