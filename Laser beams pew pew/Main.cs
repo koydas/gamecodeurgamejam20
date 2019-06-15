@@ -14,7 +14,7 @@ namespace Laser_beams_pew_pew
         public int WindowWidth;
         public int WindowHeight;
 
-        public IScene CurrentScene = new Menu();
+        public IScene CurrentScene;
         public static Main Self;
 
         public Main()
@@ -34,6 +34,7 @@ namespace Laser_beams_pew_pew
             WindowHeight = GraphicsDevice.PresentationParameters.Bounds.Height;
             // TODO: Add your initialization logic here
 
+            CurrentScene = new Menu();
             base.Initialize();
         }
 

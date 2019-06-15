@@ -17,6 +17,8 @@ namespace Laser_beams_pew_pew.Scenes
         
         public GamePlay()
         {
+            Main.Self.IsMouseVisible = false;
+
             Player = new Player(Bullets);
             LaserBoss = new LaserBoss(Lasers, Player);
         }
