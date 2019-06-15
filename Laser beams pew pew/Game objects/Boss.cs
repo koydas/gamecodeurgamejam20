@@ -9,14 +9,15 @@ namespace Laser_beams_pew_pew.Game_objects
     //todo : make as singleton
     public sealed class Boss : GameObject
     {
+        public override int HitPoints { get; set; }
+
         private readonly List<Laser> _lasers;
         private double _lastShotTimer;
         private readonly Ship _ship;
         private double _lastMovementChange;
         private double _lastMovementChangeCoolDown;
         private readonly Random _random = new Random();
-
-        public override int HitPoints { get; set; }
+        private Texture2D TextureHealthBar { get; set; }
 
         public Boss(List<Laser> lasers, Ship ship)
         {
@@ -29,6 +30,7 @@ namespace Laser_beams_pew_pew.Game_objects
             Speed = 4;
 
             Texture = Main.Self.Content.Load<Texture2D>("images/ennemy-ship");
+            TextureHealthBar = Main.Self.Content.Load<Texture2D>("images/healthbar");
 
             Position = new Vector2
             {
@@ -107,6 +109,24 @@ namespace Laser_beams_pew_pew.Game_objects
                 _lasers.Add(new Laser(position));
                 _lastShotTimer = elapsedTime;
             }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            base.Draw(spriteBatch, gameTime);
+
+            float fullWidth = 6f / 100 * HitPoints;
+
+            spriteBatch.Draw(
+                TextureHealthBar,
+                Vector2.Zero,
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                new Vector2(fullWidth, 1f), 
+                SpriteEffects.None,
+                1f);
         }
     }
 }

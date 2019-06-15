@@ -24,12 +24,12 @@ namespace Laser_beams_pew_pew.Game_objects
 
         public abstract void Update(GameTime gameTime);
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             Draw(spriteBatch, gameTime, 1f);
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime, float depth)
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, float depth)
         {
             spriteBatch.Draw(
                 Texture,
