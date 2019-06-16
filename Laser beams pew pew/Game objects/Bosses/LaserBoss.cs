@@ -10,14 +10,14 @@ namespace Laser_beams_pew_pew.Game_objects
     public sealed class LaserBoss : GameObject
     {
         public override int HitPoints { get; set; }
-        private int _maxHitPoints;
+        private readonly int _maxHitPoints;
         private readonly List<Laser> _lasers;
         private double _lastShotTimer;
         private readonly Player _player;
         private double _lastMovementChange;
         private double _lastMovementChangeCoolDown;
         private readonly Random _random = new Random();
-        
+
         private Texture2D TextureHealthBar { get; set; }
 
         private Vector2 _laserPosition => new Vector2
@@ -30,11 +30,16 @@ namespace Laser_beams_pew_pew.Game_objects
         private bool _whileSpecialMove;
         private bool _specialMoveGotToBottom;
 
+        // Cone Attack
+        private bool _whileConeAttack;
+        private double _coolDownConeAttack;
+        private double _lastConeTimer;
+
         public LaserBoss(List<Laser> lasers, Player player)
         {
             Scale = 0.5f;
 
-            HitPoints = 4;
+            HitPoints = 20;
             _maxHitPoints = HitPoints;
             _lasers = lasers;
             _player = player;
@@ -54,7 +59,7 @@ namespace Laser_beams_pew_pew.Game_objects
             var elapsedTime = gameTime.TotalGameTime.TotalMilliseconds;
 
             // phase 1
-            var lifePercentage = HitPoints/(float)_maxHitPoints;
+            var lifePercentage = HitPoints / (float)_maxHitPoints;
 
             if (lifePercentage > 0.5f)
             {
@@ -66,7 +71,6 @@ namespace Laser_beams_pew_pew.Game_objects
             else if (lifePercentage > .25f)
             {
                 Speed = 6;
-
                 if (!SpecialMove(elapsedTime))
                 {
                     // Like Phase 1
@@ -77,11 +81,14 @@ namespace Laser_beams_pew_pew.Game_objects
             // Phase 3
             else
             {
-                // todo : Cone attacks 
                 Speed = 8;
+                if (!ShootLaserCone(elapsedTime))
+                {
+                    // Like Phase 1
+                    ShootLaser(elapsedTime);
+                    Move(elapsedTime);
+                }
             }
-
-            
         }
 
         private bool SpecialMove(double elapsedTime)
@@ -172,16 +179,59 @@ namespace Laser_beams_pew_pew.Game_objects
 
             if (elapsedTime - _lastShotTimer > 500 && _random.Next(0, attackSpeed) == 5)
             {
-                _lasers.Add(new Laser(_laserPosition));
+                _lasers.Add(new Laser(_laserPosition, -180f));
                 _lastShotTimer = elapsedTime;
             }
+        }
+
+        private bool ShootLaserCone(double elapsedTime)
+        {
+            if (_lastMovementChangeCoolDown != 0 && elapsedTime - _lastMovementChangeCoolDown < 5000)
+            {
+                _lastConeTimer = elapsedTime;
+                return false;
+            }
+
+            if (elapsedTime - _lastConeTimer < 5000)
+            {
+                if (!_whileConeAttack)
+                {
+                    _lastConeTimer = elapsedTime;
+                }
+
+                _whileConeAttack = true;
+            }
+            else
+            {
+                if (_whileConeAttack)
+                {
+                    _lastMovementChangeCoolDown = elapsedTime;
+                }
+
+                _whileConeAttack = false;
+            }
+
+
+            if (_whileConeAttack)
+            {
+                var numberOfProjectiles = _random.Next(5, 20);
+
+                for (int i = 0; i < numberOfProjectiles; i++)
+                {
+                    _lasers.Add(new Laser(_laserPosition, _random.Next(-200, -160)));
+                }
+
+                return true;
+            }
+
+            return false;
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             base.Draw(spriteBatch, gameTime);
 
-            float fullWidth = 6f / 100 * HitPoints;
+            float fullWidth = 6f / _maxHitPoints * HitPoints;
 
             spriteBatch.Draw(
                 TextureHealthBar,
@@ -190,7 +240,7 @@ namespace Laser_beams_pew_pew.Game_objects
                 Color.White,
                 0f,
                 Vector2.Zero,
-                new Vector2(fullWidth, 1f), 
+                new Vector2(fullWidth, 1f),
                 SpriteEffects.None,
                 1f);
         }

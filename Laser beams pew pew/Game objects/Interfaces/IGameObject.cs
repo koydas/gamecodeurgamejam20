@@ -8,6 +8,7 @@ namespace Laser_beams_pew_pew.Game_objects.Interfaces
         Rectangle HitBox { get; }
         Texture2D Texture{ get; set; }
         Vector2 Position{ get; set; }
+        float AngleRadian { get; set; }
         float Speed{ get; set; }
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch, GameTime gameTime);

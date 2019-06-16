@@ -9,6 +9,7 @@ namespace Laser_beams_pew_pew.Game_objects
         public abstract int HitPoints { get; set; }
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
+        public float AngleRadian { get; set; }
         public float Speed { get; set; }
 
         protected float Scale = 1f;
@@ -36,7 +37,7 @@ namespace Laser_beams_pew_pew.Game_objects
                 Position,
                 null,
                 Color.White,
-                0f,
+                AngleRadian,
                 Vector2.Zero,
                 Scale,
                 SpriteEffects.None,
