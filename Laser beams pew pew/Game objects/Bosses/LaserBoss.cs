@@ -10,13 +10,14 @@ namespace Laser_beams_pew_pew.Game_objects
     public sealed class LaserBoss : GameObject
     {
         public override int HitPoints { get; set; }
-
+        private int _maxHitPoints;
         private readonly List<Laser> _lasers;
         private double _lastShotTimer;
         private readonly Player _player;
         private double _lastMovementChange;
         private double _lastMovementChangeCoolDown;
         private readonly Random _random = new Random();
+        
         private Texture2D TextureHealthBar { get; set; }
 
         private Vector2 _laserPosition => new Vector2
@@ -25,11 +26,16 @@ namespace Laser_beams_pew_pew.Game_objects
             Y = Position.Y + HitBox.Height / 3f * 1.8f,
         };
 
+        // Special Move fields
+        private bool _whileSpecialMove;
+        private bool _specialMoveGotToBottom;
+
         public LaserBoss(List<Laser> lasers, Player player)
         {
             Scale = 0.5f;
 
-            HitPoints = 100;
+            HitPoints = 4;
+            _maxHitPoints = HitPoints;
             _lasers = lasers;
             _player = player;
 
@@ -48,25 +54,64 @@ namespace Laser_beams_pew_pew.Game_objects
             var elapsedTime = gameTime.TotalGameTime.TotalMilliseconds;
 
             // phase 1
-            var lifePercentage = HitPoints/100f;
+            var lifePercentage = HitPoints/(float)_maxHitPoints;
 
             if (lifePercentage > 0.5f)
             {
                 Speed = 4;
+                ShootLaser(elapsedTime);
+                Move(elapsedTime);
             }
             // Phase 2
             else if (lifePercentage > .25f)
             {
                 Speed = 6;
+
+                if (!SpecialMove(elapsedTime))
+                {
+                    // Like Phase 1
+                    Move(elapsedTime);
+                    ShootLaser(elapsedTime);
+                }
             }
             // Phase 3
             else
             {
+                // todo : Cone attacks 
                 Speed = 8;
             }
 
-            ShootLaser(elapsedTime);
-            Move(elapsedTime);
+            
+        }
+
+        private bool SpecialMove(double elapsedTime)
+        {
+            if (_whileSpecialMove || _random.Next(0, 150) == 11)
+            {
+                _whileSpecialMove = true;
+
+                // Go to the bottom of the screen and to the top, shotting like crazy
+                if (!_specialMoveGotToBottom && Position.Y < Main.Self.WindowHeight - HitBox.Height)
+                {
+                    ShootLaser(elapsedTime, true);
+                    Position += Vector2.UnitY * Speed;
+                }
+                else if (Position.Y > 0)
+                {
+                    ShootLaser(elapsedTime, true);
+                    _specialMoveGotToBottom = true;
+                    Position -= Vector2.UnitY * Speed;
+                }
+                else
+                {
+                    _specialMoveGotToBottom = false;
+                    _whileSpecialMove = false;
+                }
+
+                return true;
+            }
+
+            return false;
         }
 
         private void Move(double elapsedTime)
@@ -121,9 +166,11 @@ namespace Laser_beams_pew_pew.Game_objects
             }
         }
 
-        private void ShootLaser(double elapsedTime)
+        private void ShootLaser(double elapsedTime, bool burstMode = false)
         {
-            if (elapsedTime - _lastShotTimer > 500 && _random.Next(0, 30) == 21)
+            var attackSpeed = burstMode ? 10 : 30;
+
+            if (elapsedTime - _lastShotTimer > 500 && _random.Next(0, attackSpeed) == 5)
             {
                 _lasers.Add(new Laser(_laserPosition));
                 _lastShotTimer = elapsedTime;

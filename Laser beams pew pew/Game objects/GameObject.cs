@@ -57,7 +57,5 @@ namespace Laser_beams_pew_pew.Game_objects
 
             return false;
         }
-
-
     }
 }
