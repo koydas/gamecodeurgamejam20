@@ -152,3 +152,9 @@
 /processorParam:TextureFormat=Color
 /build:images/ship.png
 
+#begin sounds/smallboom.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/smallboom.wav
+

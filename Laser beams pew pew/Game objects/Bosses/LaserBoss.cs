@@ -4,7 +4,7 @@ using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Laser_beams_pew_pew.Game_objects
+namespace Laser_beams_pew_pew.Game_objects.Bosses
 {
     //todo : make as singleton
     public sealed class LaserBoss : GameObject
@@ -39,7 +39,7 @@ namespace Laser_beams_pew_pew.Game_objects
         {
             Scale = 0.5f;
 
-            HitPoints = 20;
+            HitPoints = 50;
             _maxHitPoints = HitPoints;
             _lasers = lasers;
             _player = player;

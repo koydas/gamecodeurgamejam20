@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Laser_beams_pew_pew.Game_objects;
+using Laser_beams_pew_pew.Game_objects.Bosses;
 using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Laser_beams_pew_pew.Scenes.Interfaces;
 using Microsoft.Xna.Framework;

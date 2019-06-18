@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Laser_beams_pew_pew.Game_objects.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Laser_beams_pew_pew.Game_objects.Projectiles
