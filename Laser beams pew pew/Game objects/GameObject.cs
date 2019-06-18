@@ -46,13 +46,13 @@ namespace Laser_beams_pew_pew.Game_objects
 
         public virtual bool IsHit(IGameObject collider)
         {
-            if (collider is IProjectile projectile && collider.HitBox.Intersects(HitBox))
+            if (collider is IProjectile projectile && collider.HitBox.Intersects(HitBox) && !projectile.IsExploding)
             {
                 // is hit
                 projectile.HasHitSomething = true;
 
                 HitPoints -= 1;
-
+                
                 return true;
             }
 

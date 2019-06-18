@@ -54,7 +54,7 @@ namespace Laser_beams_pew_pew.Scenes
 
                 LaserBoss.IsHit(bullet);
 
-                if (bullet.Position.X > Main.Self.WindowWidth || bullet.HasHitSomething)
+                if (bullet.Position.X > Main.Self.WindowWidth || (bullet.HasHitSomething && bullet.ExplosionFinished))
                 {
                     Bullets.RemoveAt(index);
                 }

@@ -3,5 +3,6 @@
     public interface IProjectile
     {
         bool HasHitSomething { get; set; }
+        bool IsExploding { get; set; }
     }
 }

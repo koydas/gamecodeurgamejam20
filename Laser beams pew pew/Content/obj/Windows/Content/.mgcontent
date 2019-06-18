@@ -7,11 +7,23 @@
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/fonts/Space Age.spritefont</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/bullet.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/ennemy-ship.png</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion0.png</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion1.png</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion2.png</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion3.png</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion4.png</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion5.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/healthbar.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/laser.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/ship.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
