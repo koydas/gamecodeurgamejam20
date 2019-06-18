@@ -74,7 +74,7 @@ namespace Laser_beams_pew_pew.Scenes
                 }
             }
 
-            if (LaserBoss.HitPoints <= 0 || Player.HitPoints <= 0)
+            if (LaserBoss.HitPoints <= 0 || (Player.HitPoints <= 0 && Player.ExplosionFinished))
             {
                 Main.Self.IsMouseVisible = true;
                 _gameOver = true;

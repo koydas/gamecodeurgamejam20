@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Laser_beams_pew_pew.Game_objects.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +10,7 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
         private double _oldGameTime;
         private int i;
         public bool ExplosionFinished;
-        private readonly List<Texture2D> _explosionTextures;
+        private readonly Texture2D[] _explosionTextures;
 
         public override int HitPoints { get; set; }
         public bool HasHitSomething { get; set; }
@@ -24,7 +23,7 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
             Position = position;
             Texture = Main.Self.Content.Load<Texture2D>("images/bullet");
 
-            _explosionTextures = new List<Texture2D>
+            _explosionTextures = new Texture2D[]
             {
                 Main.Self.Content.Load<Texture2D>("images/explosion0"),
                 Main.Self.Content.Load<Texture2D>("images/explosion1"),
@@ -64,14 +63,14 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
                         explosionTexture,
                         new Vector2
                         {
-                            X = Position.X - explosionTexture.Width/2f,
+                            X = Position.X - explosionTexture.Width/2f*.7f,
                             Y = Position.Y - explosionTexture.Height / 2f
                         },
                         null,
                         Color.White,
                         AngleRadian,
                         Vector2.Zero,
-                        1f,
+                        0.7f,
                         SpriteEffects.None,
                         1f);
                 }
