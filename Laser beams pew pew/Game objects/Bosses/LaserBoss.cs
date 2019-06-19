@@ -203,7 +203,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             }
             else
             {
-                if (_whileConeAttack)
+                if (_whileConeAttack || _coolDownConeAttack == 0)
                 {
                     _coolDownConeAttack = elapsedTime;
                 }
