@@ -20,7 +20,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 
         private Texture2D TextureHealthBar { get; set; }
 
-        private Vector2 _laserPosition => new Vector2
+        private Vector2 LaserPosition => new Vector2
         {
             X = Position.X + HitBox.Width / 10f,
             Y = Position.Y + HitBox.Height / 3f * 1.8f,
@@ -61,14 +61,14 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             // phase 1
             var lifePercentage = HitPoints / (float)_maxHitPoints;
 
-            if (lifePercentage > 0.5f)
+            if (lifePercentage > 0.75f)
             {
                 Speed = 4;
                 ShootLaser(elapsedTime);
                 Move(elapsedTime);
             }
             // Phase 2
-            else if (lifePercentage > .25f)
+            else if (lifePercentage > .5f)
             {
                 Speed = 6;
                 if (!SpecialMove(elapsedTime))
@@ -82,7 +82,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             else
             {
                 Speed = 8;
-                if (!ShootLaserCone(elapsedTime))
+                if (!ConeAttack(elapsedTime))
                 {
                     // Like Phase 1
                     ShootLaser(elapsedTime);
@@ -163,11 +163,11 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             // doesnt always follow
             if (_random.Next(0, 3) == 1) return;
 
-            if (_player.Position.Y > _laserPosition.Y)
+            if (_player.Position.Y > LaserPosition.Y)
             {
                 Position += Vector2.UnitY * Speed;
             }
-            if (_player.Position.Y < _laserPosition.Y)
+            if (_player.Position.Y < LaserPosition.Y)
             {
                 Position -= Vector2.UnitY * Speed;
             }
@@ -179,14 +179,14 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 
             if (elapsedTime - _lastShotTimer > 500 && _random.Next(0, attackSpeed) == 5)
             {
-                _lasers.Add(new Laser(_laserPosition, -180f));
+                _lasers.Add(new Laser(LaserPosition, -180f));
                 _lastShotTimer = elapsedTime;
             }
         }
 
-        private bool ShootLaserCone(double elapsedTime)
+        private bool ConeAttack(double elapsedTime)
         {
-            if (_lastMovementChangeCoolDown != 0 && elapsedTime - _lastMovementChangeCoolDown < 5000)
+            if (_coolDownConeAttack != 0 && elapsedTime - _coolDownConeAttack < 5000)
             {
                 _lastConeTimer = elapsedTime;
                 return false;
@@ -205,7 +205,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             {
                 if (_whileConeAttack)
                 {
-                    _lastMovementChangeCoolDown = elapsedTime;
+                    _coolDownConeAttack = elapsedTime;
                 }
 
                 _whileConeAttack = false;
@@ -218,7 +218,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 
                 for (int i = 0; i < numberOfProjectiles; i++)
                 {
-                    _lasers.Add(new Laser(_laserPosition, _random.Next(-200, -160)));
+                    _lasers.Add(new Laser(LaserPosition, _random.Next(-200, -160)));
                 }
 
                 return true;

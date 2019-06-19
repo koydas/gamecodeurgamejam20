@@ -24,7 +24,7 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
             Position = position;
             Texture = Main.Self.Content.Load<Texture2D>("images/bullet");
 
-            _explosionTextures = new Texture2D[]
+            _explosionTextures = new[]
             {
                 Main.Self.Content.Load<Texture2D>("images/explosion0"),
                 Main.Self.Content.Load<Texture2D>("images/explosion1"),
