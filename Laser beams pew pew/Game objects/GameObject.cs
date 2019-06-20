@@ -47,7 +47,7 @@ namespace Laser_beams_pew_pew.Game_objects
 
         public virtual bool IsHit(IGameObject collider)
         {
-            if (collider is IProjectile projectile && collider.HitBox.Intersects(HitBox) && PixelPerfectHit(collider) && !projectile.IsExploding)
+            if (collider is IProjectile projectile && !projectile.IsExploding && HitBox.Intersects(collider.HitBox) && PixelPerfectHit(collider))
             {
                 // is hit
                 projectile.HasHitSomething = true;
@@ -62,17 +62,32 @@ namespace Laser_beams_pew_pew.Game_objects
 
         private bool PixelPerfectHit(IGameObject second)
         {
-            var sectionHitted = Rectangle.Intersect(HitBox, second.HitBox);
+            var sectionHitted = GetOverlapsedSection(second);
 
-            sectionHitted.Height = (int)(sectionHitted.Height / Scale);
-            sectionHitted.Width = (int)(sectionHitted.Width / Scale);
-            sectionHitted.X = sectionHitted.X  - (int)Position.X;
-            sectionHitted.Y = sectionHitted.Y - (int)Position.Y;
+            var gameObjectHasColor = HasColorInSection(Texture, sectionHitted);
+            var projectileObjectHasColor = HasColorInSection(second.Texture, sectionHitted);
 
-            int size = sectionHitted.Width * sectionHitted.Height;
+            return gameObjectHasColor && projectileObjectHasColor;
+        }
+
+        private Rectangle GetOverlapsedSection(IGameObject second)
+        {
+            var overlapsedSection = Rectangle.Intersect(HitBox, second.HitBox);
+
+            overlapsedSection.Height = (int)(overlapsedSection.Height / Scale);
+            overlapsedSection.Width = (int)(overlapsedSection.Width / Scale);
+            overlapsedSection.X = overlapsedSection.X - (int)Position.X;
+            overlapsedSection.Y = overlapsedSection.Y - (int)Position.Y;
+
+            return overlapsedSection;
+        }
+
+        private bool HasColorInSection(Texture2D texture, Rectangle section)
+        {
+            int size = section.Width * section.Height;
 
             Color[] buffer = new Color[size];
-            Texture.GetData(0, sectionHitted, buffer, 0, size);
+            Texture.GetData(0, section, buffer, 0, size);
 
             var hasColor = buffer.Any(x => x != Color.Transparent);
 

@@ -70,6 +70,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DebugHelpers\DebugHitBoxHelper.cs" />
     <Compile Include="Game objects\GameObject.cs" />
     <Compile Include="Game objects\Bosses\LaserBoss.cs" />
     <Compile Include="Game objects\Interfaces\IProjectile.cs" />

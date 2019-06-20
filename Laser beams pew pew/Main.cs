@@ -8,14 +8,16 @@ namespace Laser_beams_pew_pew
 {
     public class Main : Game
     {
+        public bool DebugModeEnabled = false;
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch SpriteBatch;
 
         public int WindowWidth;
         public int WindowHeight;
 
         public IScene CurrentScene;
         public static Main Self;
+        private KeyboardState _oldKeyboardState;
 
         public Main()
         {
@@ -41,7 +43,7 @@ namespace Laser_beams_pew_pew
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -53,8 +55,18 @@ namespace Laser_beams_pew_pew
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            var keyboardState = Keyboard.GetState();
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (keyboardState.IsKeyDown(Keys.LeftControl) && keyboardState.IsKeyDown(Keys.D) && _oldKeyboardState.IsKeyUp(Keys.D))
+            {
+                DebugModeEnabled = !DebugModeEnabled;
+            }
+
+            _oldKeyboardState = keyboardState;
+
 
             CurrentScene.Update(gameTime);
 
@@ -63,7 +75,7 @@ namespace Laser_beams_pew_pew
 
         protected override void Draw(GameTime gameTime)
         {
-            CurrentScene.Draw(spriteBatch, gameTime);
+            CurrentScene.Draw(SpriteBatch, gameTime);
 
             base.Draw(gameTime);
         }

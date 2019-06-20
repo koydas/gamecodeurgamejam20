@@ -14,7 +14,7 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
         public Laser(Vector2 position, float angle = 0f)
         {
             Scale = .075f;
-            Speed = 10;
+            Speed = .7f;
             AngleRadian = (float)(Math.PI / 180) * angle;
             Position = position;
             Texture = Main.Self.Content.Load<Texture2D>("images/laser");
@@ -22,8 +22,10 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
 
         public override void Update(GameTime gameTime)
         {
-            var velocityX = (float)Math.Cos(AngleRadian) * Speed;
-            var velocityY = (float)Math.Sin(AngleRadian) * Speed;
+            var milliseconds = gameTime.ElapsedGameTime.Milliseconds;
+
+            var velocityX = (float)Math.Cos(AngleRadian) * Speed * milliseconds;
+            var velocityY = (float)Math.Sin(AngleRadian) * Speed * milliseconds;
 
             Position += new Vector2(velocityX, velocityY);
         }

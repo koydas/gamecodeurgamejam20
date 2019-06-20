@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Laser_beams_pew_pew.DebugHelpers;
 using Laser_beams_pew_pew.Game_objects;
 using Laser_beams_pew_pew.Game_objects.Bosses;
 using Laser_beams_pew_pew.Game_objects.Projectiles;
@@ -44,6 +46,11 @@ namespace Laser_beams_pew_pew.Scenes
                 return;
             }
 
+            if (Main.Self.DebugModeEnabled && Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                Thread.Sleep(30);
+            }
+
             Player.Update(gameTime);
             LaserBoss.Update(gameTime);
 
@@ -65,9 +72,9 @@ namespace Laser_beams_pew_pew.Scenes
             {
                 var laser = Lasers[index];
 
-                laser.Update(gameTime);
-
                 Player.IsHit(laser);
+
+                laser.Update(gameTime);
 
                 if (laser.Position.X > Main.Self.WindowWidth || laser.HasHitSomething)
                 {
@@ -88,16 +95,22 @@ namespace Laser_beams_pew_pew.Scenes
 
             spriteBatch.Begin();
 
+            if (Main.Self.DebugModeEnabled) Player.DrawHitBox();
+            
             Player.Draw(spriteBatch, gameTime);
+
+            if (Main.Self.DebugModeEnabled) LaserBoss.DrawHitBox();
             LaserBoss.Draw(spriteBatch, gameTime);
 
             foreach (var bullet in Bullets)
             {
+                if (Main.Self.DebugModeEnabled) bullet.DrawHitBox();
                 bullet.Draw(spriteBatch, gameTime);
             }
 
             foreach (var laser in Lasers)
             {
+                if (Main.Self.DebugModeEnabled) laser.DrawHitBox();
                 laser.Draw(spriteBatch, gameTime);
             }
 
