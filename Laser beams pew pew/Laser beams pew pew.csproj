@@ -70,11 +70,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DebugHelpers\DebugHitBoxHelper.cs" />
     <Compile Include="Game objects\GameObject.cs" />
     <Compile Include="Game objects\Bosses\LaserBoss.cs" />
     <Compile Include="Game objects\Interfaces\IProjectile.cs" />
     <Compile Include="Game objects\Projectiles\Laser.cs" />
+    <Compile Include="Helpers\HitBoxHelper.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,9 +100,7 @@
     <None Include="app.manifest" />
     <None Include="Laser beams pew pew_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
-using Laser_beams_pew_pew.DebugHelpers;
 using Laser_beams_pew_pew.Game_objects;
 using Laser_beams_pew_pew.Game_objects.Bosses;
 using Laser_beams_pew_pew.Game_objects.Projectiles;
+using Laser_beams_pew_pew.Helpers;
 using Laser_beams_pew_pew.Scenes.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
