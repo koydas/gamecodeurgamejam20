@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Laser_beams_pew_pew.DebugHelpers;
 using Laser_beams_pew_pew.Game_objects;
@@ -12,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Laser_beams_pew_pew.Scenes
 {
-    public class GamePlay: IScene
+    public class GamePlay : IScene
     {
         public Player Player;
         public LaserBoss LaserBoss;
@@ -22,10 +21,12 @@ namespace Laser_beams_pew_pew.Scenes
 
         private bool _gameOver;
         private SpriteFont _font;
+        private Texture2D _planet;
 
         public GamePlay()
         {
             _font = Main.Self.Content.Load<SpriteFont>("fonts/Space Age");
+            _planet = Main.Self.Content.Load<Texture2D>("images/planet");
 
             Main.Self.IsMouseVisible = false;
 
@@ -41,7 +42,7 @@ namespace Laser_beams_pew_pew.Scenes
                     Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
                     Main.Self.CurrentScene = new Menu();
-                } 
+                }
 
                 return;
             }
@@ -95,8 +96,19 @@ namespace Laser_beams_pew_pew.Scenes
 
             spriteBatch.Begin();
 
+            spriteBatch.Draw(
+                _planet,
+                new Vector2(Main.Self.WindowWidth - _planet.Width/2, -250),
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                Vector2.One,
+                SpriteEffects.None,
+                1f);
+
             if (Main.Self.DebugModeEnabled) Player.DrawHitBox();
-            
+
             Player.Draw(spriteBatch, gameTime);
 
             if (Main.Self.DebugModeEnabled) LaserBoss.DrawHitBox();
@@ -126,7 +138,7 @@ namespace Laser_beams_pew_pew.Scenes
                     new Color(Color.White, 0.8f),
                     0f,
                     Vector2.Zero,
-                    new Vector2(1920, 1080), 
+                    new Vector2(1920, 1080),
                     SpriteEffects.None,
                     1f);
 
@@ -138,9 +150,9 @@ namespace Laser_beams_pew_pew.Scenes
                     text,
                     new Vector2
                     {
-                        X = Main.Self.WindowWidth/3f,
-                        Y = Main.Self.WindowHeight/3f,
-                    }, 
+                        X = Main.Self.WindowWidth / 3f,
+                        Y = Main.Self.WindowHeight / 3f,
+                    },
                     Color.White,
                     0f,
                     Vector2.Zero,

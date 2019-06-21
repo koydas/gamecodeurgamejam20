@@ -140,6 +140,18 @@
 /processorParam:TextureFormat=Color
 /build:images/laser.png
 
+#begin images/planet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/planet.png
+
 #begin images/ship.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -151,10 +163,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/ship.png
-
-#begin sounds/smallboom.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:sounds/smallboom.wav
 
