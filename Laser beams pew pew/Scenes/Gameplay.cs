@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using Laser_beams_pew_pew.Game_objects;
 using Laser_beams_pew_pew.Game_objects.Bosses;
+using Laser_beams_pew_pew.Game_objects.Bosses.Enums;
+using Laser_beams_pew_pew.Game_objects.Interfaces;
 using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Laser_beams_pew_pew.Helpers;
 using Laser_beams_pew_pew.Scenes.Interfaces;
@@ -12,10 +14,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Laser_beams_pew_pew.Scenes
 {
-    public class GamePlay : IScene
+    public class GamePlay<T> : IScene where T : IBoss
     {
         public Player Player;
-        public LaserBoss LaserBoss;
+        public GameObject Boss;
 
         public List<Bullet> Bullets = new List<Bullet>();
         public List<Laser> Lasers = new List<Laser>();
@@ -46,7 +48,17 @@ namespace Laser_beams_pew_pew.Scenes
             Main.Self.IsMouseVisible = false;
 
             Player = new Player(Bullets);
-            LaserBoss = new LaserBoss(Lasers, Player);
+
+
+
+            if (typeof(T).IsAssignableFrom(typeof(LaserBoss)))
+            {
+                Boss = new LaserBoss(Lasers, Player);
+            }
+            else if (typeof(T).IsAssignableFrom(typeof(BombBoss)))
+            {
+                Boss = new BombBoss(Lasers, Player);
+            }
 
             Random random = new Random();
             for (int i = 0; i < _nbOfStars; i++)
@@ -85,7 +97,7 @@ namespace Laser_beams_pew_pew.Scenes
             }
 
             Player.Update(gameTime);
-            LaserBoss.Update(gameTime);
+            Boss.Update(gameTime);
 
             for (var index = 0; index < Bullets.Count; index++)
             {
@@ -93,7 +105,7 @@ namespace Laser_beams_pew_pew.Scenes
 
                 bullet.Update(gameTime);
 
-                LaserBoss.IsHit(bullet);
+                Boss.IsHit(bullet);
 
                 if (bullet.Position.X > Main.Self.WindowWidth || (bullet.HasHitSomething && bullet.ExplosionFinished))
                 {
@@ -115,7 +127,7 @@ namespace Laser_beams_pew_pew.Scenes
                 }
             }
 
-            if (LaserBoss.HitPoints <= 0 || (Player.HitPoints <= 0 && Player.ExplosionFinished))
+            if (Boss.HitPoints <= 0 || (Player.HitPoints <= 0 && Player.ExplosionFinished))
             {
                 Main.Self.IsMouseVisible = true;
                 _gameOver = true;
@@ -170,8 +182,8 @@ namespace Laser_beams_pew_pew.Scenes
 
             Player.Draw(spriteBatch, gameTime);
 
-            if (Main.Self.DebugModeEnabled) LaserBoss.DrawHitBox();
-            LaserBoss.Draw(spriteBatch, gameTime);
+            if (Main.Self.DebugModeEnabled) Boss.DrawHitBox();
+            Boss.Draw(spriteBatch, gameTime);
 
             foreach (var bullet in Bullets)
             {

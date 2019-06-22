@@ -70,8 +70,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Game objects\Bosses\BombBoss.cs" />
+    <Compile Include="Game objects\Bosses\Boss.cs" />
+    <Compile Include="Game objects\Bosses\Enums\Boss.cs" />
     <Compile Include="Game objects\GameObject.cs" />
     <Compile Include="Game objects\Bosses\LaserBoss.cs" />
+    <Compile Include="Game objects\Interfaces\IBoss.cs" />
     <Compile Include="Game objects\Interfaces\IProjectile.cs" />
     <Compile Include="Game objects\Projectiles\Laser.cs" />
     <Compile Include="Helpers\HitBoxHelper.cs" />

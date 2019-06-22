@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Laser_beams_pew_pew.Game_objects.Interfaces;
 using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Laser_beams_pew_pew.Game_objects.Bosses
 {
     //todo : make as singleton
-    public sealed class LaserBoss : GameObject
+    public class LaserBoss : GameObject, IBoss
     {
         public override int HitPoints { get; set; }
         private readonly int _maxHitPoints;
