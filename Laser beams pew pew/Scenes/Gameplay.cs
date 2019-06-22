@@ -20,7 +20,7 @@ namespace Laser_beams_pew_pew.Scenes
         public GameObject Boss;
 
         public List<Bullet> Bullets = new List<Bullet>();
-        public List<Laser> Lasers = new List<Laser>();
+        public List<IProjectile> EnemyProjectile = new List<IProjectile>();
 
         private bool _gameOver;
         private SpriteFont _font;
@@ -53,11 +53,11 @@ namespace Laser_beams_pew_pew.Scenes
 
             if (typeof(T).IsAssignableFrom(typeof(LaserBoss)))
             {
-                Boss = new LaserBoss(Lasers, Player);
+                Boss = new LaserBoss(EnemyProjectile, Player);
             }
             else if (typeof(T).IsAssignableFrom(typeof(BombBoss)))
             {
-                Boss = new BombBoss(Lasers, Player);
+                Boss = new BombBoss(EnemyProjectile, Player);
             }
 
             Random random = new Random();
@@ -113,9 +113,9 @@ namespace Laser_beams_pew_pew.Scenes
                 }
             }
 
-            for (var index = 0; index < Lasers.Count; index++)
+            for (var index = 0; index < EnemyProjectile.Count; index++)
             {
-                var laser = Lasers[index];
+                var laser = EnemyProjectile[index];
 
                 Player.IsHit(laser);
 
@@ -123,7 +123,7 @@ namespace Laser_beams_pew_pew.Scenes
 
                 if (laser.Position.X > Main.Self.WindowWidth || laser.HasHitSomething)
                 {
-                    Lasers.RemoveAt(index);
+                    EnemyProjectile.RemoveAt(index);
                 }
             }
 
@@ -191,7 +191,7 @@ namespace Laser_beams_pew_pew.Scenes
                 bullet.Draw(spriteBatch, gameTime);
             }
 
-            foreach (var laser in Lasers)
+            foreach (var laser in EnemyProjectile)
             {
                 if (Main.Self.DebugModeEnabled) laser.DrawHitBox();
                 laser.Draw(spriteBatch, gameTime);

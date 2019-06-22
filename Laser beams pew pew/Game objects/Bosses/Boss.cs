@@ -7,7 +7,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 {
     public abstract class Boss : GameObject, IBoss
     {
-        protected Boss(List<Laser> lasers, Player player)
+        protected Boss(List<IProjectile> projectile, Player player)
         {
         }
     }

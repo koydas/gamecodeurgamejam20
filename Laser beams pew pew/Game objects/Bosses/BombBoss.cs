@@ -13,7 +13,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         public Texture2D TextureHealthBar { get; set; }
         public Texture2D TextureLauncher { get; set; }
 
-        public BombBoss(List<Laser> lasers, Player player) : base(lasers, player)
+        public BombBoss(List<IProjectile> projectiles, Player player) : base(projectiles, player)
         {
             HitPoints = 1000;
 

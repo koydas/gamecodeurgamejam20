@@ -8,11 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Laser_beams_pew_pew.Game_objects.Bosses
 {
     //todo : make as singleton
-    public class LaserBoss : GameObject, IBoss
+    public class LaserBoss : Boss
     {
         public override int HitPoints { get; set; }
         private readonly int _maxHitPoints;
-        private readonly List<Laser> _lasers;
+        private readonly List<IProjectile> _lasers;
         private double _lastShotTimer;
         private readonly Player _player;
         private double _lastMovementChange;
@@ -36,13 +36,13 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         private double _coolDownConeAttack;
         private double _lastConeTimer;
 
-        public LaserBoss(List<Laser> lasers, Player player)
+        public LaserBoss(List<IProjectile> projectile, Player player) : base(projectile, player)
         {
             Scale = 0.5f;
 
             HitPoints = 50;
             _maxHitPoints = HitPoints;
-            _lasers = lasers;
+            _lasers = projectile;
             _player = player;
 
             Texture = Main.Self.Content.Load<Texture2D>("images/ennemy-ship");
