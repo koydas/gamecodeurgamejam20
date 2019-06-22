@@ -17,8 +17,12 @@
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/laser.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/planet.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/ship.png</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/spiral.png</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/star.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

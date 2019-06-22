@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/fonts/Space Age.spritefont</SourceFile>
-  <SourceTime>2019-06-19T15:11:55.0837291-04:00</SourceTime>
-  <DestFile>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/bin/Windows/Content/fonts/Space Age.xnb</DestFile>
-  <DestTime>2019-06-21T07:42:31.3006335-04:00</DestTime>
+  <SourceFile>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/fonts/Space Age.spritefont</SourceFile>
+  <SourceTime>2019-06-15T13:36:59.6091877-04:00</SourceTime>
+  <DestFile>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/bin/Windows/Content/fonts/Space Age.xnb</DestFile>
+  <DestTime>2019-06-21T19:18:48.9326595-04:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

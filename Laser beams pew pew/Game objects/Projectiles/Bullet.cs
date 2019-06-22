@@ -19,7 +19,7 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
 
         public Bullet(Vector2 position)
         {
-            Scale = .075f;
+            Scale = .125f;
             Speed = 10;
             Position = position;
             Texture = Main.Self.Content.Load<Texture2D>("images/bullet");
