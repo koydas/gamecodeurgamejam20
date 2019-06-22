@@ -11,6 +11,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         private int _maxHitPoints;
         public override int HitPoints { get; set; }
         public Texture2D TextureHealthBar { get; set; }
+        public Texture2D TextureLauncher { get; set; }
 
         public BombBoss(List<Laser> lasers, Player player) : base(lasers, player)
         {
@@ -24,7 +25,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             //_player = player;
 
             Texture = Main.Self.Content.Load<Texture2D>("images/bomb-boss");
-            //Texture = Main.Self.Content.Load<Texture2D>("images/bomb-boss-launcher");
+            TextureLauncher = Main.Self.Content.Load<Texture2D>("images/bomb-boss-launcher");
 
             TextureHealthBar = Main.Self.Content.Load<Texture2D>("images/healthbar");
 
@@ -34,7 +35,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
                 Y = 0
             };
         }
-
+        
         public override void Update(GameTime gameTime)
         {
         }
@@ -43,6 +44,17 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         {
             base.Draw(spriteBatch, gameTime);
 
+            spriteBatch.Draw(
+                TextureLauncher,
+                Position + new Vector2(Texture.Width*Scale - 100, Texture.Height*Scale / 2f),
+                null,
+                Color.White,
+                AngleRadian,
+                Vector2.Zero,
+                Scale,
+                SpriteEffects.None,
+                1f);
+            
             float fullWidth = 6f / _maxHitPoints * HitPoints;
 
             spriteBatch.Draw(
