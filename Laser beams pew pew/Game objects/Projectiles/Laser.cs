@@ -30,5 +30,15 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
 
             Position += new Vector2(velocityX, velocityY);
         }
+
+        public override bool IsHit(IGameObject collider)
+        {
+            if (collider is Bullet && collider.HitBox.Intersects(HitBox))
+            {
+                ExplosionFinished = true;
+            }
+
+            return base.IsHit(collider);
+        }
     }
 }

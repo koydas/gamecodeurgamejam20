@@ -99,7 +99,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
                 _whileSpecialMove = true;
 
                 // Go to the bottom of the screen and to the top, shotting like crazy
-                if (!_specialMoveGotToBottom && Position.Y < Main.Self.WindowHeight - HitBox.Height)
+                if (!_specialMoveGotToBottom && Position.Y < Main.Self.WindowHeight - HitBox.Height - 200)
                 {
                     ShootLaser(elapsedTime, true);
                     Position += Vector2.UnitY * Speed;

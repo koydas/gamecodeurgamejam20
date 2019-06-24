@@ -79,7 +79,7 @@ namespace Laser_beams_pew_pew.Game_objects
             }
 
             if (keyboardState.IsKeyDown(Keys.Down) &&
-                Position.Y + HitBox.Height <= Main.Self.WindowHeight)
+                Position.Y + HitBox.Height <= Main.Self.WindowHeight - 200)
             {
                 Position += new Vector2(0, Speed);
             }
