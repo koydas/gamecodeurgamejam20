@@ -12,5 +12,6 @@ namespace Laser_beams_pew_pew.Game_objects.Interfaces
         float Speed{ get; set; }
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch, GameTime gameTime);
+        bool IsHit(IGameObject collider);
     }
 }

@@ -115,13 +115,18 @@ namespace Laser_beams_pew_pew.Scenes
 
             for (var index = 0; index < EnemyProjectile.Count; index++)
             {
-                var laser = EnemyProjectile[index];
+                var enemyProjectile = EnemyProjectile[index];
 
-                Player.IsHit(laser);
+                Player.IsHit(enemyProjectile);
 
-                laser.Update(gameTime);
+                foreach (var bullet in Bullets)
+                {
+                    enemyProjectile.IsHit(bullet);
+                }
+                
+                enemyProjectile.Update(gameTime);
 
-                if (laser.Position.X < 0 || laser.Position.X > Main.Self.WindowWidth || laser.HasHitSomething)
+                if (enemyProjectile.Position.X < 0 || enemyProjectile.Position.X > Main.Self.WindowWidth || enemyProjectile.HasHitSomething)
                 {
                     EnemyProjectile.RemoveAt(index);
                 }

@@ -37,5 +37,19 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
                 Position = new Vector2(Position.X, Main.Self.WindowHeight - Texture.Height * Scale);
             }
         }
+
+        public override bool IsHit(IGameObject collider)
+        {
+            if (collider is IProjectile projectile && !projectile.IsExploding && collider.HitBox.Intersects(HitBox))
+            {
+                projectile.HasHitSomething = true;
+
+                _velocity.X *= -1;
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
