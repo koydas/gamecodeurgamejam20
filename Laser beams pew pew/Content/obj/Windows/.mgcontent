@@ -16,6 +16,7 @@
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion3.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion4.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion5.png</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/header.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/healthbar.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/laser.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/planet.png</File>
@@ -24,6 +25,7 @@
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/star.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

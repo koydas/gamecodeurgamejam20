@@ -11,23 +11,25 @@ namespace Laser_beams_pew_pew.Scenes
     {
         private SpriteFont _font;
         private readonly Texture2D _laserboss;
-        private readonly Vector2 _laserBossPosition = new Vector2(100, 100);
+        private readonly Vector2 _laserBossPosition = new Vector2(550, 500);
         private Color _laserBossColor = Color.White;
 
         private Texture2D _bombBoss;
         private readonly Vector2 _bombBossPosition;
         private Color _bombBossColor = Color.White;
+        private Texture2D _header;
 
         public Menu()
         {
             Main.Self.IsMouseVisible = true;
 
             _font = Main.Self.Content.Load<SpriteFont>("fonts/Space Age");
+            _header = Main.Self.Content.Load<Texture2D>("images/header");
             _laserboss = Main.Self.Content.Load<Texture2D>("images/ennemy-ship");
             _bombBoss = Main.Self.Content.Load<Texture2D>("images/bomb-boss");
 
 
-            _bombBossPosition = new Vector2(_laserBossPosition.X + _laserboss.Width, 100);
+            _bombBossPosition = new Vector2(_laserBossPosition.X + _laserboss.Width, _laserBossPosition.Y);
         }
 
         public void Update(GameTime gameTime)
@@ -78,7 +80,9 @@ namespace Laser_beams_pew_pew.Scenes
 
             spriteBatch.Begin();
 
-            spriteBatch.DrawString(_font, "Choose your enemy", Vector2.Zero, Color.White);
+            spriteBatch.Draw(_header, Vector2.One);
+
+            spriteBatch.DrawString(_font, "Choose your enemy", new Vector2(600, 400), Color.White);
 
             spriteBatch.Draw(
                 _laserboss,

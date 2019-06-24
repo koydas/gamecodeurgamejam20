@@ -245,5 +245,12 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
                 SpriteEffects.None,
                 1f);
         }
+
+        public override bool IsHit(IGameObject collider)
+        {
+            if (collider is Laser) return false;
+
+            return base.IsHit(collider);
+        }
     }
 }

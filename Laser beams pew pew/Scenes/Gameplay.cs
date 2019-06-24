@@ -242,8 +242,8 @@ namespace Laser_beams_pew_pew.Scenes
                     "Click to try again",
                     new Vector2
                     {
-                        X = Main.Self.WindowWidth / 3f,
-                        Y = Main.Self.WindowHeight / 2f,
+                        X = Main.Self.WindowWidth / 3f - 250,
+                        Y = Main.Self.WindowHeight / 2f + 100,
                     },
                     Color.White,
                     0f,
