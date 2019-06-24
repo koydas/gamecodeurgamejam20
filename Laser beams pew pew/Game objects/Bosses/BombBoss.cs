@@ -42,6 +42,15 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         
         public override void Update(GameTime gameTime)
         {
+            var lifePercentage = HitPoints / (float)_maxHitPoints;
+            if (lifePercentage > 0.7) 
+                Phase1();
+            else if (lifePercentage > .4)
+                Phase2();
+        }
+
+        private void Phase1()
+        {
             if (_bombs.Count <= 0)
                 _bombs.Add(new Bomb(Position));
 
@@ -51,7 +60,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
                 Random random = new Random();
                 int x = random.Next(Main.Self.WindowWidth / 2, Main.Self.WindowWidth - HitBox.Width);
                 int y = _positionToGo.Y > Main.Self.WindowHeight / 2f
-                    ? random.Next(0, Main.Self.WindowHeight / 2 - HitBox.Height*2)
+                    ? random.Next(0, Main.Self.WindowHeight / 2 - HitBox.Height * 2)
                     : random.Next(Main.Self.WindowHeight / 2, Main.Self.WindowHeight - HitBox.Height);
 
                 _positionToGo = new Vector2(x, y);
@@ -60,6 +69,11 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             {
                 Position += (_positionToGo - Position) * .01f;
             }
+        }
+
+        private void Phase2()
+        {
+            throw new NotImplementedException();
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
