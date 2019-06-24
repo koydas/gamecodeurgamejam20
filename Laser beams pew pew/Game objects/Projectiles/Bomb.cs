@@ -29,7 +29,7 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
             Position += _velocity;
             _velocity.Y -= Gravity;
 
-            if (Position.Y >= Main.Self.WindowHeight - Texture.Height*Scale)
+            if (Position.Y >= Main.Self.WindowHeight - Texture.Height * Scale)
             {
                 _velocity.Y *= -1;
                 _velocity.Y *= 0.85f;

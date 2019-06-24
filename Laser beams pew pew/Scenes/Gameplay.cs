@@ -121,7 +121,7 @@ namespace Laser_beams_pew_pew.Scenes
 
                 laser.Update(gameTime);
 
-                if (laser.Position.X > Main.Self.WindowWidth || laser.HasHitSomething)
+                if (laser.Position.X < 0 || laser.Position.X > Main.Self.WindowWidth || laser.HasHitSomething)
                 {
                     EnemyProjectile.RemoveAt(index);
                 }
