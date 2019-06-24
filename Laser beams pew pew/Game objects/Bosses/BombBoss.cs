@@ -42,11 +42,11 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         
         public override void Update(GameTime gameTime)
         {
-            var lifePercentage = HitPoints / (float)_maxHitPoints;
-            if (lifePercentage > 0.7) 
+            //var lifePercentage = HitPoints / (float)_maxHitPoints;
+            //if (lifePercentage > 0.7) 
                 Phase1();
-            else if (lifePercentage > .4)
-                Phase2();
+            //else if (lifePercentage > .4)
+            //    Phase2();
         }
 
         private void Phase1()
@@ -73,7 +73,8 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 
         private void Phase2()
         {
-            throw new NotImplementedException();
+            // TODO : Faire une phase 2
+            Phase1();
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
