@@ -77,6 +77,7 @@
     <Compile Include="Game objects\Bosses\LaserBoss.cs" />
     <Compile Include="Game objects\Interfaces\IBoss.cs" />
     <Compile Include="Game objects\Interfaces\IProjectile.cs" />
+    <Compile Include="Game objects\Projectiles\Bomb.cs" />
     <Compile Include="Game objects\Projectiles\Laser.cs" />
     <Compile Include="Helpers\HitBoxHelper.cs" />
     <Compile Include="Main.cs" />

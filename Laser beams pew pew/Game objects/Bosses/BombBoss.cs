@@ -9,6 +9,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
     public sealed class BombBoss : Boss
     {
         private int _maxHitPoints;
+        private List<IProjectile> _bombs;
         public override int HitPoints { get; set; }
         public Texture2D TextureHealthBar { get; set; }
         public Texture2D TextureLauncher { get; set; }
@@ -23,7 +24,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             _maxHitPoints = HitPoints;
             //_lasers = lasers;
             //_player = player;
-
+            _bombs = projectiles;
             Texture = Main.Self.Content.Load<Texture2D>("images/bomb-boss");
             TextureLauncher = Main.Self.Content.Load<Texture2D>("images/bomb-boss-launcher");
 
@@ -38,6 +39,8 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         
         public override void Update(GameTime gameTime)
         {
+            if (_bombs.Count <= 0)
+                _bombs.Add(new Bomb(Position));
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)

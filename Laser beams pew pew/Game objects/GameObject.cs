@@ -12,6 +12,7 @@ namespace Laser_beams_pew_pew.Game_objects
         public Vector2 Position { get; set; }
         public float AngleRadian { get; set; }
         public float Speed { get; set; }
+        public Color Color = Color.White;
 
         protected float Scale = 1f;
 
@@ -37,7 +38,7 @@ namespace Laser_beams_pew_pew.Game_objects
                 Texture,
                 Position,
                 null,
-                Color.White,
+                Color,
                 AngleRadian,
                 Vector2.Zero,
                 Scale,

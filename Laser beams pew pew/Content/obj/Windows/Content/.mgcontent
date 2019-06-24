@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/fonts/Space Age.spritefont</File>
+    <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/bomb.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/bomb-boss.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/bomb-boss-launcher.png</File>
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/bullet.png</File>
@@ -23,6 +24,7 @@
     <File>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/star.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
