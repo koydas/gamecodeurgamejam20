@@ -26,6 +26,10 @@ namespace Laser_beams_pew_pew.Game_objects
                 Height = (int)(Texture.Height * Scale)
             };
 
+        public float HitPointsPercentage => HitPoints / (float)MaxHitPoints;
+
+        protected int MaxHitPoints { get; set; }
+
         public abstract void Update(GameTime gameTime);
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)

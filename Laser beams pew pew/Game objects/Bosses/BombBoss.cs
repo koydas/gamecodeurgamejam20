@@ -9,10 +9,9 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 {
     public sealed class BombBoss : Boss
     {
-        private int _maxHitPoints;
         private List<IProjectile> _bombs;
         public override int HitPoints { get; set; }
-        public Texture2D TextureHealthBar { get; set; }
+        //public Texture2D TextureHealthBar { get; set; }
         public Texture2D TextureLauncher { get; set; }
 
         private Vector2 _positionToGo;
@@ -24,14 +23,14 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             Scale = 0.5f;
 
             HitPoints = 5;
-            _maxHitPoints = HitPoints;
+            MaxHitPoints = HitPoints;
             //_lasers = lasers;
             //_player = player;
             _bombs = projectiles;
             Texture = Main.Self.Content.Load<Texture2D>("images/bomb-boss");
             TextureLauncher = Main.Self.Content.Load<Texture2D>("images/bomb-boss-launcher");
 
-            TextureHealthBar = Main.Self.Content.Load<Texture2D>("images/healthbar");
+            //TextureHealthBar = Main.Self.Content.Load<Texture2D>("images/healthbar");
 
             Position = new Vector2
             {
@@ -92,18 +91,18 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
                 SpriteEffects.None,
                 1f);
             
-            float fullWidth = 6f / _maxHitPoints * HitPoints;
+            //float fullWidth = 6f / MaxHitPoints * HitPoints;
 
-            spriteBatch.Draw(
-                TextureHealthBar,
-                Vector2.Zero,
-                null,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                new Vector2(fullWidth, 1f),
-                SpriteEffects.None,
-                1f);
+            //spriteBatch.Draw(
+            //    TextureHealthBar,
+            //    Vector2.Zero,
+            //    null,
+            //    Color.White,
+            //    0f,
+            //    Vector2.Zero,
+            //    new Vector2(fullWidth, 1f),
+            //    SpriteEffects.None,
+            //    1f);
         }
 
         public override bool IsHit(IGameObject collider)

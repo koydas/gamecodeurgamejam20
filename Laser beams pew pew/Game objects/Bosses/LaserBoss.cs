@@ -11,7 +11,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
     public class LaserBoss : Boss
     {
         public override int HitPoints { get; set; }
-        private readonly int _maxHitPoints;
+        //private readonly int _maxHitPoints;
         private readonly List<IProjectile> _lasers;
         private double _lastShotTimer;
         private readonly Player _player;
@@ -19,7 +19,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         private double _lastMovementChangeCoolDown;
         private readonly Random _random = new Random();
 
-        private Texture2D TextureHealthBar { get; set; }
+        //private Texture2D TextureHealthBar { get; set; }
 
         private Vector2 LaserPosition => new Vector2
         {
@@ -41,12 +41,12 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             Scale = 0.5f;
 
             HitPoints = 50;
-            _maxHitPoints = HitPoints;
+            MaxHitPoints = HitPoints;
             _lasers = projectile;
             _player = player;
 
             Texture = Main.Self.Content.Load<Texture2D>("images/ennemy-ship");
-            TextureHealthBar = Main.Self.Content.Load<Texture2D>("images/healthbar");
+            //TextureHealthBar = Main.Self.Content.Load<Texture2D>("images/healthbar");
 
             Position = new Vector2
             {
@@ -60,7 +60,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             var elapsedTime = gameTime.TotalGameTime.TotalMilliseconds;
 
             // phase 1
-            var lifePercentage = HitPoints / (float)_maxHitPoints;
+            var lifePercentage = HitPoints / (float)MaxHitPoints;
 
             if (lifePercentage > 0.75f)
             {
@@ -232,18 +232,18 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         {
             base.Draw(spriteBatch, gameTime);
 
-            float fullWidth = 6f / _maxHitPoints * HitPoints;
+            //float fullWidth = 6f / MaxHitPoints * HitPoints;
 
-            spriteBatch.Draw(
-                TextureHealthBar,
-                Vector2.Zero,
-                null,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                new Vector2(fullWidth, 1f),
-                SpriteEffects.None,
-                1f);
+            //spriteBatch.Draw(
+            //    TextureHealthBar,
+            //    Vector2.Zero,
+            //    null,
+            //    Color.White,
+            //    0f,
+            //    Vector2.Zero,
+            //    new Vector2(fullWidth, 1f),
+            //    SpriteEffects.None,
+            //    1f);
         }
 
         public override bool IsHit(IGameObject collider)

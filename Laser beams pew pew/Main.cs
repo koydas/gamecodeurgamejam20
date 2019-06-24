@@ -24,8 +24,12 @@ namespace Laser_beams_pew_pew
             graphics = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferWidth = 1920,
-                PreferredBackBufferHeight = 1080
+                PreferredBackBufferHeight = 1080,
             };
+
+            Window.IsBorderless = true;
+            Window.Position = Point.Zero;
+
             Content.RootDirectory = "Content";
             Self = this;
         }
@@ -67,7 +71,7 @@ namespace Laser_beams_pew_pew
 
                 CurrentScene = new Menu();
             }
-                
+
 
             if (keyboardState.IsKeyDown(Keys.LeftControl) && keyboardState.IsKeyDown(Keys.D) && _oldKeyboardState.IsKeyUp(Keys.D))
             {

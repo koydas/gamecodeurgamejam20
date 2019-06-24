@@ -30,6 +30,8 @@ namespace Laser_beams_pew_pew.Scenes
 
         private int _nbOfStars = 30;
         private readonly IList<Star> _stars = new List<Star>();
+        private Texture2D _healbarBorder;
+        private Texture2D _healbarFill;
 
         private struct Star
         {
@@ -44,6 +46,9 @@ namespace Laser_beams_pew_pew.Scenes
             _planet = Main.Self.Content.Load<Texture2D>("images/planet");
             _spiral = Main.Self.Content.Load<Texture2D>("images/spiral");
             _star = Main.Self.Content.Load<Texture2D>("images/star");
+
+            _healbarBorder = Main.Self.Content.Load<Texture2D>("images/healthbar-border");
+            _healbarFill = Main.Self.Content.Load<Texture2D>("images/healthbar-fill");
 
             Main.Self.IsMouseVisible = false;
 
@@ -202,6 +207,33 @@ namespace Laser_beams_pew_pew.Scenes
                 if (Main.Self.DebugModeEnabled) laser.DrawHitBox();
                 laser.Draw(spriteBatch, gameTime);
             }
+
+            var healbarBgFill = new Texture2D(Main.Self.GraphicsDevice, 1, 1);
+            healbarBgFill.SetData(new[] { Color.Black });
+
+            spriteBatch.Draw(
+                healbarBgFill,
+                new Vector2(175, Main.Self.WindowHeight - _healbarBorder.Height - 25),
+                null,
+                Color.Black,
+                0f,
+                Vector2.Zero,
+                new Vector2(_healbarBorder.Width, 98),
+                SpriteEffects.None,
+                1f);
+
+            spriteBatch.Draw(
+                _healbarFill,
+                new Vector2(175, Main.Self.WindowHeight - _healbarBorder.Height - 25),
+                null,
+                new Color(Color.White, 0.8f),
+                0f,
+                Vector2.Zero,
+                new Vector2(Boss.HitPointsPercentage, 1f),
+                SpriteEffects.None,
+                1f);
+
+            spriteBatch.Draw(_healbarBorder, new Vector2(175, Main.Self.WindowHeight - _healbarBorder.Height - 25));
 
             if (_gameOver)
             {
