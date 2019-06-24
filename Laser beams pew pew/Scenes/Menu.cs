@@ -19,6 +19,12 @@ namespace Laser_beams_pew_pew.Scenes
         private Color _bombBossColor = Color.White;
         private Texture2D _header;
 
+        private Color _quitColor;
+        private Vector2 _quitPosition = new Vector2(50, Main.Self.WindowHeight - 100);
+
+        private Color _configColor;
+        private Vector2 _configPosition = new Vector2(Main.Self.WindowWidth - 550, Main.Self.WindowHeight - 100);
+
         public Menu()
         {
             Main.Self.IsMouseVisible = true;
@@ -61,6 +67,9 @@ namespace Laser_beams_pew_pew.Scenes
             _laserBossColor = mouseRect.Intersects(laserBossRect) ? Color.White : Color.Gray;
             _bombBossColor = mouseRect.Intersects(bombBossRect) ? Color.White : Color.Gray;
 
+            _quitColor = mouseRect.Intersects(new Rectangle(_quitPosition.ToPoint(), new Point(150, 50))) ? Color.Gray : Color.White;
+            _configColor = mouseRect.Intersects(new Rectangle(_configPosition.ToPoint(), new Point(550, 50))) ? Color.Gray : Color.White;
+
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 if (mouseRect.Intersects(laserBossRect))
@@ -83,6 +92,8 @@ namespace Laser_beams_pew_pew.Scenes
             spriteBatch.Draw(_header, Vector2.One);
 
             spriteBatch.DrawString(_font, "Choose your enemy", new Vector2(600, 400), Color.White);
+            spriteBatch.DrawString(_font, "Quit", _quitPosition, _quitColor);
+            spriteBatch.DrawString(_font, "Configurations", _configPosition, _configColor);
 
             spriteBatch.Draw(
                 _laserboss,
