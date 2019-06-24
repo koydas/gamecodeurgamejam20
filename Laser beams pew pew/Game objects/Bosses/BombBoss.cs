@@ -23,7 +23,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 
             Scale = 0.5f;
 
-            HitPoints = 50;
+            HitPoints = 5;
             _maxHitPoints = HitPoints;
             //_lasers = lasers;
             //_player = player;
@@ -103,6 +103,23 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
                 new Vector2(fullWidth, 1f),
                 SpriteEffects.None,
                 1f);
+        }
+
+        public override bool IsHit(IGameObject collider)
+        {
+            if (!(collider is Bomb bomb))
+            {
+                if (collider is IProjectile projectile && projectile.HitBox.Intersects(HitBox))
+                {
+                    projectile.HasHitSomething = true;
+                }
+
+                return false;
+            }
+
+            if (!bomb.Reflected) return false;
+
+            return base.IsHit(collider);
         }
     }
 }

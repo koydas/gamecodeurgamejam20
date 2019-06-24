@@ -10,6 +10,7 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
         public override int HitPoints { get; set; }
         public bool HasHitSomething { get; set; }
         public bool IsExploding { get; set; }
+        public bool ExplosionFinished { get; set; }
 
         public Laser(Vector2 position, float angle = 0f)
         {

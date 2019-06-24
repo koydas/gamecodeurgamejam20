@@ -6,5 +6,6 @@ namespace Laser_beams_pew_pew.Game_objects.Interfaces
     {
         bool HasHitSomething { get; set; }
         bool IsExploding { get; set; }
+        bool ExplosionFinished { get; set; }
     }
 }

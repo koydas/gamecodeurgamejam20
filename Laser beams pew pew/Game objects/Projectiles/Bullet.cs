@@ -10,12 +10,12 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
     {
         private double _oldGameTime;
         private int i;
-        public bool ExplosionFinished;
         private readonly Texture2D[] _explosionTextures;
 
         public override int HitPoints { get; set; }
         public bool HasHitSomething { get; set; }
         public bool IsExploding { get; set; }
+        public bool ExplosionFinished { get; set; }
 
         public Bullet(Vector2 position)
         {

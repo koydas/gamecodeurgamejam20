@@ -118,6 +118,7 @@ namespace Laser_beams_pew_pew.Scenes
                 var enemyProjectile = EnemyProjectile[index];
 
                 Player.IsHit(enemyProjectile);
+                Boss.IsHit(enemyProjectile);
 
                 foreach (var bullet in Bullets)
                 {
@@ -126,7 +127,7 @@ namespace Laser_beams_pew_pew.Scenes
                 
                 enemyProjectile.Update(gameTime);
 
-                if (enemyProjectile.Position.X < 0 || enemyProjectile.Position.X > Main.Self.WindowWidth || enemyProjectile.HasHitSomething)
+                if (enemyProjectile.Position.X < 0 || enemyProjectile.Position.X > Main.Self.WindowWidth || enemyProjectile.ExplosionFinished)
                 {
                     EnemyProjectile.RemoveAt(index);
                 }
