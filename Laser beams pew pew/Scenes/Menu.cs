@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
 using Laser_beams_pew_pew.Game_objects.Bosses;
 using Laser_beams_pew_pew.Game_objects.Bosses.Enums;
 using Laser_beams_pew_pew.Scenes.Interfaces;
@@ -8,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Laser_beams_pew_pew.Scenes
 {
-    public class Menu: IScene
+    public class Menu : IScene
     {
         private SpriteFont _font;
         private readonly Texture2D _laserboss;
@@ -30,6 +33,14 @@ namespace Laser_beams_pew_pew.Scenes
         private bool _showConfig;
         private MouseState _oldMouseState;
         private KeyboardState _oldKeyboardState;
+
+        private KeyValuePair<string, Keys?>? changeKey = null;
+
+        //private bool changeUpKey;
+        //private bool changeDownKey;
+        //private bool changeLeftKey;
+        //private bool changeRightKey;
+        //private bool changeFireKey;
 
         public Menu()
         {
@@ -61,32 +72,105 @@ namespace Laser_beams_pew_pew.Scenes
 
             if (_showConfig)
             {
-                _quitColor = mouseRect.Intersects(_quitRect) ? Color.Gray : Color.White;
-                _configColor = mouseRect.Intersects(_configRect) ? Color.Gray : Color.White;
+                ConfigMenu(mouseRect, mouseState, keyboardState);
+            }
+            else
+            {
+                MainMenu(mouseRect, mouseState);
+            }
 
-                if (keyboardState.IsKeyDown(Keys.Escape) && _oldKeyboardState.IsKeyUp(Keys.Escape))
-                {
-                    _showConfig = false;
-                }
+            _oldMouseState = mouseState;
+            _oldKeyboardState = keyboardState;
+        }
+
+        private void ConfigMenu(Rectangle mouseRect, MouseState mouseState, KeyboardState keyboardState)
+        {
+            if (changeKey != null)
+            {
+                var pressedKeys = keyboardState.GetPressedKeys();
                 
-                if (mouseState.LeftButton == ButtonState.Pressed && _oldMouseState.LeftButton == ButtonState.Released)
+                if (pressedKeys.Any())
                 {
-                    if (mouseRect.Intersects(_quitRect))
-                    {
-                        _showConfig = false;
-                    }
-                    else if (mouseRect.Intersects(_configRect))
-                    {
-                        _showConfig = true;
-                    }
-                }
+                    var pressedKey = pressedKeys.First();
 
-                _oldMouseState = mouseState;
-                _oldKeyboardState = keyboardState;
+                    if (pressedKey != Keys.Escape)
+                    {
+                        switch (changeKey.Value.Key)
+                        {
+                            case "up":
+                                Settings.Up = pressedKey;
+                                break;
+                            case "down":
+                                Settings.Down = pressedKey;
+                                break;
+                            case "left":
+                                Settings.Left = pressedKey;
+                                break;
+                            case "right":
+                                Settings.Right = pressedKey;
+                                break;
+                            case "fire":
+                                Settings.Fire = pressedKey;
+                                break;
+                        }
+                    }
+
+                    changeKey = null;
+                }
 
                 return;
             }
 
+            _quitColor = mouseRect.Intersects(_quitRect) ? Color.Gray : Color.White;
+            _configColor = mouseRect.Intersects(_configRect) ? Color.Gray : Color.White;
+
+            if (keyboardState.IsKeyDown(Keys.Escape) && _oldKeyboardState.IsKeyUp(Keys.Escape))
+            {
+                _showConfig = false;
+            }
+
+            if (mouseState.LeftButton == ButtonState.Pressed && _oldMouseState.LeftButton == ButtonState.Released)
+            {
+                if (mouseRect.Intersects(_quitRect))
+                {
+                    _showConfig = false;
+                }
+                else if (mouseRect.Intersects(_configRect))
+                {
+                    _showConfig = true;
+                }
+
+                else if (mouseRect.Intersects(new Rectangle(new Point(700, 250), new Point(400, 50))))
+                {
+                    // Change Up key
+                    
+                    changeKey = new KeyValuePair<string, Keys?>("up", null);
+                }
+                else if (mouseRect.Intersects(new Rectangle(new Point(700, 350), new Point(400, 50))))
+                {
+                    // Change Down key
+                    changeKey = new KeyValuePair<string, Keys?>("down", null);
+                }
+                else if (mouseRect.Intersects(new Rectangle(new Point(700, 450), new Point(400, 50))))
+                {
+                    // Change Left key
+                    changeKey = new KeyValuePair<string, Keys?>("left", null);
+                }
+                else if (mouseRect.Intersects(new Rectangle(new Point(700, 550), new Point(400, 50))))
+                {
+                    // Change Right key
+                    changeKey = new KeyValuePair<string, Keys?>("right", null);
+                }
+                else if (mouseRect.Intersects(new Rectangle(new Point(700, 650), new Point(400, 50))))
+                {
+                    // Change Fire key
+                    changeKey = new KeyValuePair<string, Keys?>("fire", null);
+                }
+            }
+        }
+
+        private void MainMenu(Rectangle mouseRect, MouseState mouseState)
+        {
             var laserBossRect = new Rectangle
             {
                 Width = _laserboss.Width / 2,
@@ -128,9 +212,6 @@ namespace Laser_beams_pew_pew.Scenes
                     _showConfig = true;
                 }
             }
-
-            _oldMouseState = mouseState;
-            _oldKeyboardState = keyboardState;
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -185,14 +266,20 @@ namespace Laser_beams_pew_pew.Scenes
 
                 spriteBatch.DrawString(_font, "Keyboard layout", new Vector2(700, 75), Color.White);
 
-                spriteBatch.DrawString(_font, $"Up : {Settings.Up.ToString()}", new Vector2(700, 250), Color.White);
-                spriteBatch.DrawString(_font, $"Down : {Settings.Down.ToString()}", new Vector2(700, 350), Color.White);
-                spriteBatch.DrawString(_font, $"Left : {Settings.Left.ToString()}", new Vector2(700, 450), Color.White);
-                spriteBatch.DrawString(_font, $"Right : {Settings.Right.ToString()}", new Vector2(700, 550), Color.White);
-                spriteBatch.DrawString(_font, $"Fire : {Settings.Fire.ToString()}", new Vector2(700, 650), Color.White);
-                
+                string upText = changeKey != null && changeKey.Value.Key == "up" ? "Up : hit the new key" : $"Up : {Settings.Up.ToString()}";
+                string downText = changeKey != null && changeKey.Value.Key == "down" ? "Down : hit the new key" : $"Down : {Settings.Down.ToString()}";
+                string leftText = changeKey != null && changeKey.Value.Key == "left" ? "Left : hit the new key" : $"Left : {Settings.Left.ToString()}";
+                string rightText = changeKey != null && changeKey.Value.Key == "right" ? "Right : hit the new key" : $"Right : {Settings.Right.ToString()}";
+                string fireText = changeKey != null && changeKey.Value.Key == "fire" ? "Fire : hit the new key" : $"Fire : {Settings.Fire.ToString()}";
+
+                spriteBatch.DrawString(_font, upText, new Vector2(700, 250), Color.White);
+                spriteBatch.DrawString(_font, downText, new Vector2(700, 350), Color.White);
+                spriteBatch.DrawString(_font, leftText, new Vector2(700, 450), Color.White);
+                spriteBatch.DrawString(_font, rightText, new Vector2(700, 550), Color.White);
+                spriteBatch.DrawString(_font, fireText, new Vector2(700, 650), Color.White);
+
                 spriteBatch.DrawString(_font, "Back", _quitPosition, _quitColor);
-                spriteBatch.DrawString(_font, "Save", _configPosition + new Vector2(300, 0), _configColor);
+                //spriteBatch.DrawString(_font, "Save", _configPosition + new Vector2(300, 0), _configColor);
             }
 
             spriteBatch.End();
