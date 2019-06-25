@@ -32,6 +32,8 @@ namespace Laser_beams_pew_pew
 
             Content.RootDirectory = "Content";
             Self = this;
+
+            Settings.LoadSettings();
         }
 
         protected override void Initialize()

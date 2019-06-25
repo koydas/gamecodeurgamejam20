@@ -98,23 +98,24 @@ namespace Laser_beams_pew_pew.Scenes
                         switch (changeKey.Value.Key)
                         {
                             case "up":
-                                Settings.Up = pressedKey;
+                                Settings.Keys.Up = pressedKey;
                                 break;
                             case "down":
-                                Settings.Down = pressedKey;
+                                Settings.Keys.Down = pressedKey;
                                 break;
                             case "left":
-                                Settings.Left = pressedKey;
+                                Settings.Keys.Left = pressedKey;
                                 break;
                             case "right":
-                                Settings.Right = pressedKey;
+                                Settings.Keys.Right = pressedKey;
                                 break;
                             case "fire":
-                                Settings.Fire = pressedKey;
+                                Settings.Keys.Fire = pressedKey;
                                 break;
                         }
                     }
 
+                    Settings.SaveSettings();
                     changeKey = null;
                 }
 
@@ -266,11 +267,11 @@ namespace Laser_beams_pew_pew.Scenes
 
                 spriteBatch.DrawString(_font, "Keyboard layout", new Vector2(700, 75), Color.White);
 
-                string upText = changeKey != null && changeKey.Value.Key == "up" ? "Up : hit the new key" : $"Up : {Settings.Up.ToString()}";
-                string downText = changeKey != null && changeKey.Value.Key == "down" ? "Down : hit the new key" : $"Down : {Settings.Down.ToString()}";
-                string leftText = changeKey != null && changeKey.Value.Key == "left" ? "Left : hit the new key" : $"Left : {Settings.Left.ToString()}";
-                string rightText = changeKey != null && changeKey.Value.Key == "right" ? "Right : hit the new key" : $"Right : {Settings.Right.ToString()}";
-                string fireText = changeKey != null && changeKey.Value.Key == "fire" ? "Fire : hit the new key" : $"Fire : {Settings.Fire.ToString()}";
+                string upText = changeKey != null && changeKey.Value.Key == "up" ? "Up : hit the new key" : $"Up : {Settings.Keys.Up.ToString()}";
+                string downText = changeKey != null && changeKey.Value.Key == "down" ? "Down : hit the new key" : $"Down : {Settings.Keys.Down.ToString()}";
+                string leftText = changeKey != null && changeKey.Value.Key == "left" ? "Left : hit the new key" : $"Left : {Settings.Keys.Left.ToString()}";
+                string rightText = changeKey != null && changeKey.Value.Key == "right" ? "Right : hit the new key" : $"Right : {Settings.Keys.Right.ToString()}";
+                string fireText = changeKey != null && changeKey.Value.Key == "fire" ? "Fire : hit the new key" : $"Fire : {Settings.Keys.Fire.ToString()}";
 
                 spriteBatch.DrawString(_font, upText, new Vector2(700, 250), Color.White);
                 spriteBatch.DrawString(_font, downText, new Vector2(700, 350), Color.White);

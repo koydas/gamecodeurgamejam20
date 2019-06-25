@@ -1,13 +1,58 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using System;
+using System.IO;
+using System.Text;
+using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json;
 
 namespace Laser_beams_pew_pew
 {
     public static class Settings
     {
-        public static Keys Up = Keys.Up;
-        public static Keys Down = Keys.Down;
-        public static Keys Left = Keys.Left;
-        public static Keys Right = Keys.Right;
-        public static Keys Fire = Keys.Space;
+        public static KeyboardLayout Keys;
+        
+        private static string _path = "./configs.json";
+
+        public static void LoadSettings()
+        {
+            if (!File.Exists(_path)) return;
+
+            string[] lines = File.ReadAllLines(_path);
+
+            string json = "";
+            foreach (var line in lines)
+            {
+                json += line;
+            }
+
+            var configs = JsonConvert.DeserializeObject<KeyboardLayout>(json);
+
+            Keys = configs;
+        }
+
+        public static void SaveSettings()
+        {
+            var a = new KeyboardLayout
+            {
+                Up = Keys.Up,
+                Down = Keys.Down,
+                Left = Keys.Left,
+                Right = Keys.Right,
+                Fire = Keys.Fire
+            };
+
+            var json = JsonConvert.SerializeObject(a);
+
+            if (File.Exists(_path))
+            {
+                File.Delete(_path);
+            }
+
+            using (FileStream fs = File.Create(_path))
+            {
+                byte[] info = new UTF8Encoding(true).GetBytes(json);
+                // Add some information to the file.
+                fs.Write(info, 0, info.Length);
+            }
+        }
     }
 }
