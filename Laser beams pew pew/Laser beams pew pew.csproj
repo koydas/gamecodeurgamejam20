@@ -96,6 +96,7 @@
     <Compile Include="Game objects\Interfaces\IGameObject.cs" />
     <Compile Include="Game objects\Projectiles\Bullet.cs" />
     <Compile Include="Game objects\Player.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

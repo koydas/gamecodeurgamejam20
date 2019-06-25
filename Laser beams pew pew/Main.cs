@@ -61,16 +61,16 @@ namespace Laser_beams_pew_pew
         {
             var keyboardState = Keyboard.GetState();
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                keyboardState.IsKeyDown(Keys.Escape) && _oldKeyboardState.IsKeyUp(Keys.Escape))
-            {
-                if (CurrentScene is Menu)
-                {
-                    Exit();
-                }
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+            //    keyboardState.IsKeyDown(Keys.Escape) && _oldKeyboardState.IsKeyUp(Keys.Escape))
+            //{
+            //    if (CurrentScene is Menu)
+            //    {
+            //        Exit();
+            //    }
 
-                CurrentScene = new Menu();
-            }
+            //    CurrentScene = new Menu();
+            //}
 
 
             if (keyboardState.IsKeyDown(Keys.LeftControl) && keyboardState.IsKeyDown(Keys.D) && _oldKeyboardState.IsKeyUp(Keys.D))

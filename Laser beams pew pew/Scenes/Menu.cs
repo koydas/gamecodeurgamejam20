@@ -1,4 +1,5 @@
-﻿using Laser_beams_pew_pew.Game_objects.Bosses;
+﻿using System;
+using Laser_beams_pew_pew.Game_objects.Bosses;
 using Laser_beams_pew_pew.Game_objects.Bosses.Enums;
 using Laser_beams_pew_pew.Scenes.Interfaces;
 using Microsoft.Xna.Framework;
@@ -24,6 +25,11 @@ namespace Laser_beams_pew_pew.Scenes
 
         private Color _configColor;
         private Vector2 _configPosition = new Vector2(Main.Self.WindowWidth - 550, Main.Self.WindowHeight - 100);
+        private readonly Rectangle _quitRect;
+        private readonly Rectangle _configRect;
+        private bool _showConfig;
+        private MouseState _oldMouseState;
+        private KeyboardState _oldKeyboardState;
 
         public Menu()
         {
@@ -36,17 +42,50 @@ namespace Laser_beams_pew_pew.Scenes
 
 
             _bombBossPosition = new Vector2(_laserBossPosition.X + _laserboss.Width, _laserBossPosition.Y);
+            _quitRect = new Rectangle(_quitPosition.ToPoint(), new Point(150, 50));
+            _configRect = new Rectangle(_configPosition.ToPoint(), new Point(550, 50));
         }
 
         public void Update(GameTime gameTime)
         {
+            var mouseState = Mouse.GetState();
+            var keyboardState = Keyboard.GetState();
+
             var mouseRect = new Rectangle
             {
                 Width = 1,
                 Height = 1,
-                X = Mouse.GetState().Position.X,
-                Y = Mouse.GetState().Position.Y
+                X = mouseState.Position.X,
+                Y = mouseState.Position.Y
             };
+
+            if (_showConfig)
+            {
+                _quitColor = mouseRect.Intersects(_quitRect) ? Color.Gray : Color.White;
+                _configColor = mouseRect.Intersects(_configRect) ? Color.Gray : Color.White;
+
+                if (keyboardState.IsKeyDown(Keys.Escape) && _oldKeyboardState.IsKeyUp(Keys.Escape))
+                {
+                    _showConfig = false;
+                }
+                
+                if (mouseState.LeftButton == ButtonState.Pressed && _oldMouseState.LeftButton == ButtonState.Released)
+                {
+                    if (mouseRect.Intersects(_quitRect))
+                    {
+                        _showConfig = false;
+                    }
+                    else if (mouseRect.Intersects(_configRect))
+                    {
+                        _showConfig = true;
+                    }
+                }
+
+                _oldMouseState = mouseState;
+                _oldKeyboardState = keyboardState;
+
+                return;
+            }
 
             var laserBossRect = new Rectangle
             {
@@ -67,10 +106,10 @@ namespace Laser_beams_pew_pew.Scenes
             _laserBossColor = mouseRect.Intersects(laserBossRect) ? Color.White : Color.Gray;
             _bombBossColor = mouseRect.Intersects(bombBossRect) ? Color.White : Color.Gray;
 
-            _quitColor = mouseRect.Intersects(new Rectangle(_quitPosition.ToPoint(), new Point(150, 50))) ? Color.Gray : Color.White;
-            _configColor = mouseRect.Intersects(new Rectangle(_configPosition.ToPoint(), new Point(550, 50))) ? Color.Gray : Color.White;
+            _quitColor = mouseRect.Intersects(_quitRect) ? Color.Gray : Color.White;
+            _configColor = mouseRect.Intersects(_configRect) ? Color.Gray : Color.White;
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (mouseState.LeftButton == ButtonState.Pressed && _oldMouseState.LeftButton == ButtonState.Released)
             {
                 if (mouseRect.Intersects(laserBossRect))
                 {
@@ -80,7 +119,18 @@ namespace Laser_beams_pew_pew.Scenes
                 {
                     Main.Self.CurrentScene = new GamePlay<BombBoss>();
                 }
+                else if (mouseRect.Intersects(_quitRect))
+                {
+                    Main.Self.Exit();
+                }
+                else if (mouseRect.Intersects(_configRect))
+                {
+                    _showConfig = true;
+                }
             }
+
+            _oldMouseState = mouseState;
+            _oldKeyboardState = keyboardState;
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -116,6 +166,34 @@ namespace Laser_beams_pew_pew.Scenes
                 0.5f,
                 SpriteEffects.None,
                 1f);
+
+            if (_showConfig)
+            {
+                var overlayTexture = new Texture2D(Main.Self.GraphicsDevice, 1, 1);
+                overlayTexture.SetData(new[] { Color.Black });
+
+                spriteBatch.Draw(
+                    overlayTexture,
+                    Vector2.Zero,
+                    null,
+                    Color.White,
+                    0f,
+                    Vector2.Zero,
+                    new Vector2(1920, 1080),
+                    SpriteEffects.None,
+                    1f);
+
+                spriteBatch.DrawString(_font, "Keyboard layout", new Vector2(700, 75), Color.White);
+
+                spriteBatch.DrawString(_font, $"Up : {Settings.Up.ToString()}", new Vector2(700, 250), Color.White);
+                spriteBatch.DrawString(_font, $"Down : {Settings.Down.ToString()}", new Vector2(700, 350), Color.White);
+                spriteBatch.DrawString(_font, $"Left : {Settings.Left.ToString()}", new Vector2(700, 450), Color.White);
+                spriteBatch.DrawString(_font, $"Right : {Settings.Right.ToString()}", new Vector2(700, 550), Color.White);
+                spriteBatch.DrawString(_font, $"Fire : {Settings.Fire.ToString()}", new Vector2(700, 650), Color.White);
+                
+                spriteBatch.DrawString(_font, "Back", _quitPosition, _quitColor);
+                spriteBatch.DrawString(_font, "Save", _configPosition + new Vector2(300, 0), _configColor);
+            }
 
             spriteBatch.End();
         }

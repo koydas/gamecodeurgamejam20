@@ -57,7 +57,7 @@ namespace Laser_beams_pew_pew.Game_objects
 
             Move(keyboardState);
 
-            if (keyboardState.IsKeyDown(Keys.Space) &&
+            if (keyboardState.IsKeyDown(Settings.Fire) &&
                 gameTime.TotalGameTime.TotalMilliseconds - _lastShotTimer > 500)
             {
                 Vector2 position = new Vector2
@@ -73,24 +73,24 @@ namespace Laser_beams_pew_pew.Game_objects
 
         private void Move(KeyboardState keyboardState)
         {
-            if (keyboardState.IsKeyDown(Keys.Up) && Position.Y >= 0)
+            if (keyboardState.IsKeyDown(Settings.Up) && Position.Y >= 0)
             {
                 Position -= new Vector2(0, Speed);
             }
 
-            if (keyboardState.IsKeyDown(Keys.Down) &&
+            if (keyboardState.IsKeyDown(Settings.Down) &&
                 Position.Y + HitBox.Height <= Main.Self.WindowHeight - 200)
             {
                 Position += new Vector2(0, Speed);
             }
 
-            if (keyboardState.IsKeyDown(Keys.Left) &&
+            if (keyboardState.IsKeyDown(Settings.Left) &&
                 Position.X > 0)
             {
                 Position -= new Vector2(Speed, 0);
             }
 
-            if (keyboardState.IsKeyDown(Keys.Right) &&
+            if (keyboardState.IsKeyDown(Settings.Right) &&
                 Position.X + HitBox.Width <= Main.Self.WindowWidth/2f)
             {
                 Position += new Vector2(Speed, 0);
