@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using Laser_beams_pew_pew.Game_objects.Bosses;
-using Laser_beams_pew_pew.Game_objects.Bosses.Enums;
 using Laser_beams_pew_pew.Scenes.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -35,13 +32,7 @@ namespace Laser_beams_pew_pew.Scenes
         private KeyboardState _oldKeyboardState;
 
         private KeyValuePair<string, Keys?>? changeKey = null;
-
-        //private bool changeUpKey;
-        //private bool changeDownKey;
-        //private bool changeLeftKey;
-        //private bool changeRightKey;
-        //private bool changeFireKey;
-
+        
         public Menu()
         {
             Main.Self.IsMouseVisible = true;
@@ -143,28 +134,22 @@ namespace Laser_beams_pew_pew.Scenes
 
                 else if (mouseRect.Intersects(new Rectangle(new Point(700, 250), new Point(400, 50))))
                 {
-                    // Change Up key
-                    
                     changeKey = new KeyValuePair<string, Keys?>("up", null);
                 }
                 else if (mouseRect.Intersects(new Rectangle(new Point(700, 350), new Point(400, 50))))
                 {
-                    // Change Down key
                     changeKey = new KeyValuePair<string, Keys?>("down", null);
                 }
                 else if (mouseRect.Intersects(new Rectangle(new Point(700, 450), new Point(400, 50))))
                 {
-                    // Change Left key
                     changeKey = new KeyValuePair<string, Keys?>("left", null);
                 }
                 else if (mouseRect.Intersects(new Rectangle(new Point(700, 550), new Point(400, 50))))
                 {
-                    // Change Right key
                     changeKey = new KeyValuePair<string, Keys?>("right", null);
                 }
                 else if (mouseRect.Intersects(new Rectangle(new Point(700, 650), new Point(400, 50))))
                 {
-                    // Change Fire key
                     changeKey = new KeyValuePair<string, Keys?>("fire", null);
                 }
             }
@@ -280,7 +265,6 @@ namespace Laser_beams_pew_pew.Scenes
                 spriteBatch.DrawString(_font, fireText, new Vector2(700, 650), Color.White);
 
                 spriteBatch.DrawString(_font, "Back", _quitPosition, _quitColor);
-                //spriteBatch.DrawString(_font, "Save", _configPosition + new Vector2(300, 0), _configColor);
             }
 
             spriteBatch.End();

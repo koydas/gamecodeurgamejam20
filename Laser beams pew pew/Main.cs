@@ -40,7 +40,6 @@ namespace Laser_beams_pew_pew
         {
             WindowWidth = GraphicsDevice.PresentationParameters.Bounds.Width;
             WindowHeight = GraphicsDevice.PresentationParameters.Bounds.Height;
-            // TODO: Add your initialization logic here
 
             CurrentScene = new Menu();
             base.Initialize();
@@ -50,31 +49,16 @@ namespace Laser_beams_pew_pew
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
         protected override void Update(GameTime gameTime)
         {
             var keyboardState = Keyboard.GetState();
-
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-            //    keyboardState.IsKeyDown(Keys.Escape) && _oldKeyboardState.IsKeyUp(Keys.Escape))
-            //{
-            //    if (CurrentScene is Menu)
-            //    {
-            //        Exit();
-            //    }
-
-            //    CurrentScene = new Menu();
-            //}
-
-
+            
             if (keyboardState.IsKeyDown(Keys.LeftControl) && keyboardState.IsKeyDown(Keys.D) && _oldKeyboardState.IsKeyUp(Keys.D))
             {
                 DebugModeEnabled = !DebugModeEnabled;

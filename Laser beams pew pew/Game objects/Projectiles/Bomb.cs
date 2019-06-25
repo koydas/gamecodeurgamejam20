@@ -19,6 +19,7 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
         private readonly Texture2D[] _explosionTextures;
         private int i;
         private double _oldGameTime;
+        private Random _random = new Random();
 
         public Bomb(Vector2 position)
         {
@@ -45,12 +46,13 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
             Position += _velocity;
             _velocity.Y -= Gravity;
 
-            if (Position.Y >= Main.Self.WindowHeight - Texture.Height * Scale)
+            var bottom = Main.Self.WindowHeight - Texture.Height * Scale - 125;
+            if (Position.Y >= bottom)
             {
                 _velocity.Y *= -1;
-                _velocity.Y *= 0.85f;
+                _velocity.Y *= _random.Next(85, 100) / 100f;
 
-                Position = new Vector2(Position.X, Main.Self.WindowHeight - Texture.Height * Scale);
+                Position = new Vector2(Position.X, bottom);
             }
         }
 

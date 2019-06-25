@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -79,7 +79,6 @@
   <ItemGroup>
     <Compile Include="Game objects\Bosses\BombBoss.cs" />
     <Compile Include="Game objects\Bosses\Boss.cs" />
-    <Compile Include="Game objects\Bosses\Enums\Boss.cs" />
     <Compile Include="Game objects\GameObject.cs" />
     <Compile Include="Game objects\Bosses\LaserBoss.cs" />
     <Compile Include="Game objects\Interfaces\IBoss.cs" />

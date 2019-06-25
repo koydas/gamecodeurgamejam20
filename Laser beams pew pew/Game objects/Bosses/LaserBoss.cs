@@ -7,19 +7,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Laser_beams_pew_pew.Game_objects.Bosses
 {
-    //todo : make as singleton
     public class LaserBoss : Boss
     {
         public override int HitPoints { get; set; }
-        //private readonly int _maxHitPoints;
         private readonly List<IProjectile> _lasers;
         private double _lastShotTimer;
         private readonly Player _player;
         private double _lastMovementChange;
         private double _lastMovementChangeCoolDown;
         private readonly Random _random = new Random();
-
-        //private Texture2D TextureHealthBar { get; set; }
 
         private Vector2 LaserPosition => new Vector2
         {
@@ -46,7 +42,6 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             _player = player;
 
             Texture = Main.Self.Content.Load<Texture2D>("images/ennemy-ship");
-            //TextureHealthBar = Main.Self.Content.Load<Texture2D>("images/healthbar");
 
             Position = new Vector2
             {
@@ -226,24 +221,6 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             }
 
             return false;
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
-        {
-            base.Draw(spriteBatch, gameTime);
-
-            //float fullWidth = 6f / MaxHitPoints * HitPoints;
-
-            //spriteBatch.Draw(
-            //    TextureHealthBar,
-            //    Vector2.Zero,
-            //    null,
-            //    Color.White,
-            //    0f,
-            //    Vector2.Zero,
-            //    new Vector2(fullWidth, 1f),
-            //    SpriteEffects.None,
-            //    1f);
         }
 
         public override bool IsHit(IGameObject collider)

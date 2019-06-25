@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using Laser_beams_pew_pew.Game_objects;
 using Laser_beams_pew_pew.Game_objects.Bosses;
-using Laser_beams_pew_pew.Game_objects.Bosses.Enums;
 using Laser_beams_pew_pew.Game_objects.Interfaces;
 using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Laser_beams_pew_pew.Helpers;
