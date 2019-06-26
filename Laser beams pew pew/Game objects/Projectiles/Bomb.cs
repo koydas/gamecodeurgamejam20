@@ -19,13 +19,13 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
         private readonly Texture2D[] _explosionTextures;
         private int i;
         private double _oldGameTime;
-        private Random _random = new Random();
+        private readonly Random _random = new Random();
 
-        public Bomb(Vector2 position)
+        public Bomb(Vector2 position, float? scale = null)
         {
             Position = position;
             Color = Color.Yellow;
-            Scale = 0.2f;
+            Scale = scale ?? 0.2f;
             Texture = Main.Self.Content.Load<Texture2D>("images/bomb");
 
             _velocity = new Vector2(-3f, 7f);
@@ -100,7 +100,19 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
 
         public override bool IsHit(IGameObject collider)
         {
-            if (!Reflected && collider is IProjectile projectile && !projectile.IsExploding && collider.HitBox.Intersects(HitBox))
+            if (collider is Bullet bullet && !bullet.IsExploding && bullet.HitBox.Intersects(HitBox))
+            {
+                bullet.HasHitSomething = true;
+            }
+
+            var projectile = collider as IProjectile;
+
+            if (projectile != null && projectile.Position.X > Main.Self.WindowWidth / 2f)
+            {
+                return false;
+            }
+
+            if (!Reflected && projectile != null && !projectile.IsExploding  && collider.HitBox.Intersects(HitBox))
             {
                 projectile.HasHitSomething = true;
 

@@ -15,6 +15,8 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 
         private Vector2 _positionToGo;
         private double _lastShot;
+        private readonly Random _random = new Random();
+        private int _currentPhase = 1;
 
         public BombBoss(List<IProjectile> projectiles, Player player) : base(projectiles, player)
         {
@@ -40,7 +42,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             var elapsed = gameTime.TotalGameTime.TotalMilliseconds;
             if (HitPointsPercentage > 0.7) 
                 Phase1(elapsed);
-            else if (HitPointsPercentage > .4)
+            else if (HitPointsPercentage > .6)
                 Phase2(elapsed);
             else
                 Phase3(elapsed);
@@ -48,24 +50,40 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 
         private void Phase1(double elapsed)
         {
+            if (_currentPhase == 2) _currentPhase = 3;
             if (_bombs.Count < 3 && elapsed - _lastShot > 1500)
             {
                 _bombs.Add(new Bomb(Position));
                 _lastShot = elapsed;
             }
-                
 
-            if (_positionToGo.X - Position.X < 10 && _positionToGo.Y - Position.Y < 10 ||
-                _positionToGo == default(Vector2)) // Get new position to go
+            Movement();
+        }
+
+        private void Phase2(double elapsed)
+        {
+            if (_currentPhase == 2)
             {
-                Random random = new Random();
+                _currentPhase = 3;
+                _bombs.Clear();
+            }
 
-                int x = random.Next(Main.Self.WindowWidth / 2, Main.Self.WindowWidth - HitBox.Width);
-                int y = _positionToGo.Y > Main.Self.WindowHeight / 2f
-                    ? random.Next(0, Main.Self.WindowHeight / 2 - HitBox.Height * 2)
-                    : random.Next(Main.Self.WindowHeight / 2, Main.Self.WindowHeight - HitBox.Height - 125);
+            if (_bombs.Count < 1)
+            {
+                var bomb = new Bomb(Position, 1f);
+                _bombs.Add(bomb);
 
-                _positionToGo = new Vector2(x, y);
+                _lastShot = elapsed;
+            }
+            
+            if (_positionToGo.X - Position.X < 10 && _positionToGo.Y - Position.Y < 10 ||
+                _positionToGo == default(Vector2))
+            {
+                _positionToGo = new Vector2
+                {
+                    X = _random.Next(Main.Self.WindowWidth/2, Main.Self.WindowWidth),
+                    Y = _random.Next(0, 300)
+                };
             }
             else
             {
@@ -73,12 +91,31 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
             }
         }
 
-        private void Phase2(double elapsed)
-        {
-        }
-
         private void Phase3(double elapsed)
         {
+            if (elapsed - _lastShot > 1000)
+            {
+                _bombs.Add(new Bomb(Position));
+                _lastShot = elapsed;
+            }
+        }
+
+        private void Movement()
+        {
+            if (_positionToGo.X - Position.X < 10 && _positionToGo.Y - Position.Y < 10 ||
+                _positionToGo == default(Vector2)) // Get new position to go
+            {
+                var x = _random.Next(Main.Self.WindowWidth / 2, Main.Self.WindowWidth - HitBox.Width);
+                var y = _positionToGo.Y > Main.Self.WindowHeight / 2f
+                    ? _random.Next(0, Main.Self.WindowHeight / 2 - HitBox.Height * 2)
+                    : _random.Next(Main.Self.WindowHeight / 2, Main.Self.WindowHeight - HitBox.Height - 125);
+
+                _positionToGo = new Vector2(x, y);
+            }
+            else
+            {
+                Position += (_positionToGo - Position) * .01f;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)

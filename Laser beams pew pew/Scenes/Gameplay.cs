@@ -53,8 +53,6 @@ namespace Laser_beams_pew_pew.Scenes
 
             Player = new Player(Bullets);
 
-
-
             if (typeof(T).IsAssignableFrom(typeof(LaserBoss)))
             {
                 Boss = new LaserBoss(EnemyProjectile, Player);
@@ -111,6 +109,11 @@ namespace Laser_beams_pew_pew.Scenes
 
                 Boss.IsHit(bullet);
 
+                if (Boss is BombBoss && bullet.Position.X > Main.Self.WindowWidth/2f)
+                {
+                    bullet.HasHitSomething = true;
+                }
+
                 if (bullet.Position.X > Main.Self.WindowWidth || (bullet.HasHitSomething && bullet.ExplosionFinished))
                 {
                     Bullets.RemoveAt(index);
@@ -128,7 +131,13 @@ namespace Laser_beams_pew_pew.Scenes
                 {
                     enemyProjectile.IsHit(bullet);
                 }
-                
+
+                foreach (var enemyProjectile2 in EnemyProjectile)
+                {
+                    if (enemyProjectile2 != enemyProjectile)
+                        enemyProjectile.IsHit(enemyProjectile2);
+                }
+
                 enemyProjectile.Update(gameTime);
 
                 if (enemyProjectile.Position.X < 0 || enemyProjectile.Position.X > Main.Self.WindowWidth || enemyProjectile.ExplosionFinished)
