@@ -8,7 +8,14 @@ namespace Laser_beams_pew_pew
 {
     public static class Settings
     {
-        public static KeyboardLayout Keys;
+        public static KeyboardLayout Keys = new KeyboardLayout
+        {
+            Up = Microsoft.Xna.Framework.Input.Keys.Up,
+            Down = Microsoft.Xna.Framework.Input.Keys.Down,
+            Left = Microsoft.Xna.Framework.Input.Keys.Left,
+            Right = Microsoft.Xna.Framework.Input.Keys.Right,
+            Fire = Microsoft.Xna.Framework.Input.Keys.Space
+        };
         
         private static string _path = "./configs.json";
 
