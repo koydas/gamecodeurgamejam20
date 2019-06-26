@@ -24,8 +24,14 @@
     <File>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/images/ship.png</File>
     <File>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/images/spiral.png</File>
     <File>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/images/star.png</File>
+    <File>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/sounds/battle-music.mp3</File>
+    <File>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/sounds/laser.mp3</File>
+    <File>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/sounds/smallboom.wav</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

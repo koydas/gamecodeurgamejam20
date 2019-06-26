@@ -1,6 +1,7 @@
 ﻿using System;
 using Laser_beams_pew_pew.Game_objects.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Laser_beams_pew_pew.Game_objects.Projectiles
@@ -19,6 +20,7 @@ namespace Laser_beams_pew_pew.Game_objects.Projectiles
             AngleRadian = (float)(Math.PI / 180) * angle;
             Position = position;
             Texture = Main.Self.Content.Load<Texture2D>("images/laser");
+            Main.Self.Content.Load<SoundEffect>("sounds/laser").Play();
         }
 
         public override void Update(GameTime gameTime)

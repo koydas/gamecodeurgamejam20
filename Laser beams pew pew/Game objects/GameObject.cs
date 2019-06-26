@@ -2,6 +2,7 @@
 using Laser_beams_pew_pew.Game_objects.Interfaces;
 using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Laser_beams_pew_pew.Game_objects
@@ -55,6 +56,11 @@ namespace Laser_beams_pew_pew.Game_objects
         {
             if (collider is IProjectile projectile && !projectile.IsExploding && HitBox.Intersects(collider.HitBox) && PixelPerfectHit(collider))
             {
+                if (collider is Bullet || collider is Bomb)
+                {
+                    Main.Self.Content.Load<SoundEffect>("sounds/smallboom").Play();
+                }
+
                 // is hit
                 projectile.HasHitSomething = true;
 

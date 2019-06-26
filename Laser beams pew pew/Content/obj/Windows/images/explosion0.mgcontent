@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion0.png</SourceFile>
-  <SourceTime>2019-06-16T14:20:13.6599959-04:00</SourceTime>
-  <DestFile>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/bin/Windows/images/explosion0.xnb</DestFile>
-  <DestTime>2019-06-24T13:36:56.8959501-04:00</DestTime>
+  <SourceFile>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/images/explosion0.png</SourceFile>
+  <SourceTime>2019-06-19T15:11:55.0877079-04:00</SourceTime>
+  <DestFile>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/bin/Windows/images/explosion0.xnb</DestFile>
+  <DestTime>2019-06-26T13:43:17.7086422-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
