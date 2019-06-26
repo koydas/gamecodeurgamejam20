@@ -8,8 +8,10 @@ using Laser_beams_pew_pew.Game_objects.Projectiles;
 using Laser_beams_pew_pew.Helpers;
 using Laser_beams_pew_pew.Scenes.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Laser_beams_pew_pew.Scenes
 {
@@ -48,6 +50,7 @@ namespace Laser_beams_pew_pew.Scenes
 
             _healbarBorder = Main.Self.Content.Load<Texture2D>("images/healthbar-border");
             _healbarFill = Main.Self.Content.Load<Texture2D>("images/healthbar-fill");
+            Main.Self.Content.Load<Song>("sounds/battle-music");
 
             Main.Self.IsMouseVisible = false;
 
@@ -148,6 +151,7 @@ namespace Laser_beams_pew_pew.Scenes
 
             if (Boss.HitPoints <= 0 || (Player.HitPoints <= 0 && Player.ExplosionFinished))
             {
+                Main.Self.Content.Load<SoundEffect>("sounds/smallboom").Play();
                 Main.Self.IsMouseVisible = true;
                 _gameOver = true;
             }
