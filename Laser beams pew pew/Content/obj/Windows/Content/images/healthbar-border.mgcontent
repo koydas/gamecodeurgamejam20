@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/images/healthbar-border.png</SourceFile>
-  <SourceTime>2019-06-26T07:58:04.3223687-04:00</SourceTime>
-  <DestFile>C:/perso/gamecodeurgamejam20/Laser beams pew pew/Content/bin/Windows/Content/images/healthbar-border.xnb</DestFile>
-  <DestTime>2019-06-26T07:58:22.4154833-04:00</DestTime>
+  <SourceFile>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/images/healthbar-border.png</SourceFile>
+  <SourceTime>2019-06-24T13:36:38.8098118-04:00</SourceTime>
+  <DestFile>C:/Dev/MonoGame/gamecodeurgamejam20/Laser beams pew pew/Content/bin/Windows/Content/images/healthbar-border.xnb</DestFile>
+  <DestTime>2019-06-26T20:06:12.8856019-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

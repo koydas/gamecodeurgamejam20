@@ -28,7 +28,7 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
         private bool _specialMoveGotToBottom;
 
         // Cone Attack
-        private bool _whileConeAttack;
+        public bool WhileConeAttack;
         private double _coolDownConeAttack;
         private double _lastConeTimer;
 
@@ -190,27 +190,27 @@ namespace Laser_beams_pew_pew.Game_objects.Bosses
 
             if (elapsedTime - _lastConeTimer < 5000)
             {
-                if (!_whileConeAttack)
+                if (!WhileConeAttack)
                 {
                     _lastConeTimer = elapsedTime;
                 }
 
-                _whileConeAttack = true;
+                WhileConeAttack = true;
             }
             else
             {
-                if (_whileConeAttack || _coolDownConeAttack == 0)
+                if (WhileConeAttack || _coolDownConeAttack == 0)
                 {
                     _coolDownConeAttack = elapsedTime;
                 }
 
-                _whileConeAttack = false;
+                WhileConeAttack = false;
             }
 
 
-            if (_whileConeAttack)
+            if (WhileConeAttack)
             {
-                var numberOfProjectiles = _random.Next(5, 20);
+                var numberOfProjectiles = _random.Next(1, 20);
 
                 for (int i = 0; i < numberOfProjectiles; i++)
                 {

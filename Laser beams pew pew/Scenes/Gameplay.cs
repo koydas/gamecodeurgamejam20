@@ -50,7 +50,11 @@ namespace Laser_beams_pew_pew.Scenes
 
             _healbarBorder = Main.Self.Content.Load<Texture2D>("images/healthbar-border");
             _healbarFill = Main.Self.Content.Load<Texture2D>("images/healthbar-fill");
-            Main.Self.Content.Load<Song>("sounds/battle-music");
+            var music = Main.Self.Content.Load<Song>("sounds/battle-music");
+
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.3f;
+            MediaPlayer.Play(music);
 
             Main.Self.IsMouseVisible = false;
 
@@ -130,17 +134,20 @@ namespace Laser_beams_pew_pew.Scenes
                 Player.IsHit(enemyProjectile);
                 Boss.IsHit(enemyProjectile);
 
-                foreach (var bullet in Bullets)
+                if (!(Boss is LaserBoss laserBoss && laserBoss.WhileConeAttack))
                 {
-                    enemyProjectile.IsHit(bullet);
-                }
+                    foreach (var bullet in Bullets)
+                    {
+                        enemyProjectile.IsHit(bullet);
+                    }
 
-                foreach (var enemyProjectile2 in EnemyProjectile)
-                {
-                    if (enemyProjectile2 != enemyProjectile)
-                        enemyProjectile.IsHit(enemyProjectile2);
+                    foreach (var enemyProjectile2 in EnemyProjectile)
+                    {
+                        if (enemyProjectile2 != enemyProjectile)
+                            enemyProjectile.IsHit(enemyProjectile2);
+                    }
                 }
-
+                
                 enemyProjectile.Update(gameTime);
 
                 if (enemyProjectile.Position.X < 0 || enemyProjectile.Position.X > Main.Self.WindowWidth || enemyProjectile.ExplosionFinished)
