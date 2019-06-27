@@ -111,8 +111,9 @@ namespace Laser_beams_pew_pew.Scenes
             for (var index = 0; index < Bullets.Count; index++)
             {
                 var bullet = Bullets[index];
-
                 bullet.Update(gameTime);
+
+                if (Boss.HitPoints <= 0 || Player.HitPoints <= 0) break;
 
                 Boss.IsHit(bullet);
 
@@ -130,6 +131,9 @@ namespace Laser_beams_pew_pew.Scenes
             for (var index = 0; index < EnemyProjectile.Count; index++)
             {
                 var enemyProjectile = EnemyProjectile[index];
+                enemyProjectile.Update(gameTime);
+
+                if (Boss.HitPoints <= 0 || Player.HitPoints <= 0) break;
 
                 Player.IsHit(enemyProjectile);
                 Boss.IsHit(enemyProjectile);
@@ -148,8 +152,6 @@ namespace Laser_beams_pew_pew.Scenes
                     }
                 }
                 
-                enemyProjectile.Update(gameTime);
-
                 if (enemyProjectile.Position.X < 0 || enemyProjectile.Position.X > Main.Self.WindowWidth || enemyProjectile.ExplosionFinished)
                 {
                     EnemyProjectile.RemoveAt(index);
