@@ -33,6 +33,7 @@ namespace Laser_beams_pew_pew.Scenes
         private readonly IList<Star> _stars = new List<Star>();
         private Texture2D _healbarBorder;
         private Texture2D _healbarFill;
+        private MouseState _oldMouseState;
 
         private struct Star
         {
@@ -91,11 +92,13 @@ namespace Laser_beams_pew_pew.Scenes
         {
             if (_gameOver)
             {
-                if (Mouse.GetState().LeftButton == ButtonState.Pressed ||
+                if ((Mouse.GetState().LeftButton == ButtonState.Pressed && _oldMouseState.LeftButton == ButtonState.Released) ||
                     Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
                     Main.Self.CurrentScene = new Menu();
                 }
+
+                _oldMouseState = Mouse.GetState();
 
                 return;
             }
@@ -117,7 +120,7 @@ namespace Laser_beams_pew_pew.Scenes
 
                 Boss.IsHit(bullet);
 
-                if (Boss is BombBoss && bullet.Position.X > Main.Self.WindowWidth/2f)
+                if (Boss is BombBoss && bullet.Position.X > Main.Self.WindowWidth / 2f)
                 {
                     bullet.HasHitSomething = true;
                 }
@@ -151,7 +154,7 @@ namespace Laser_beams_pew_pew.Scenes
                             enemyProjectile.IsHit(enemyProjectile2);
                     }
                 }
-                
+
                 if (enemyProjectile.Position.X < 0 || enemyProjectile.Position.X > Main.Self.WindowWidth || enemyProjectile.ExplosionFinished)
                 {
                     EnemyProjectile.RemoveAt(index);
